@@ -1,8 +1,11 @@
-import {Text} from 'react-native';
+import {View} from 'react-native';
+import ActivityCard from '../components/ActivityCard';
 
 const HomePage = () => {
     return (
-        <Text>Home Screen</Text>
+        <View>
+            <ActivityCard/>
+        </View>
     );
 }
 

@@ -38,10 +38,10 @@ const AppNavigator = () => {
                     tabBarInactiveTintColor: 'gray',
                 })}>
                 <Tab.Screen name = "Emirate Gym" component = {HomePage} options= {{headerTintColor: '#FF0000', headerTitleStyle: styles.headerTitle}} />
-                <Tab.Screen name = "Feed" component = {SocialMedia} />
-                <Tab.Screen name = "Camera" component = {Camera} />
-                <Tab.Screen name = "Membership" component = {Membership} />
-                <Tab.Screen name = "Profile" component = {Profile} />
+                <Tab.Screen name = "Feed" component = {SocialMedia} options= {{headerTintColor: '#FF0000', headerTitleStyle: styles.headerTitle}} />
+                <Tab.Screen name = "Camera" component = {Camera} options= {{headerTintColor: '#FF0000', headerTitleStyle: styles.headerTitle}} />
+                <Tab.Screen name = "Membership" component = {Membership} options= {{headerTintColor: '#FF0000', headerTitleStyle: styles.headerTitle}} />
+                <Tab.Screen name = "Profile" component = {Profile} options= {{headerTintColor: '#FF0000', headerTitleStyle: styles.headerTitle}} />
             </Tab.Navigator>
         </NavigationContainer>
     );
@@ -49,7 +49,7 @@ const AppNavigator = () => {
 
 const styles = StyleSheet.create({
     headerTitle: {
-      fontFamily: 'Cinzel_400Regular',
+      fontFamily: 'Cinzel_600SemiBold',
       fontSize: 26,
     },
   });

@@ -5,20 +5,9 @@ const ActivityCard = () => {
     return (
         <ScrollView>
             <View style={styles.card}>
-                
-                <HomeMenu 
-                    imageSource={require('../images/gym.jpg')}
-                    title="Box 1"
-                />
-                <HomeMenu 
-                    imageSource={require('../images/swim.jpg')}
-                    title="Box 1"
-                />
-                <HomeMenu 
-                    imageSource={require('../images/gym.jpg')}
-                    title="Box 1"
-                />
-                
+                <HomeMenu imageSource={require('../images/gymRoom.jpg')} title="Gym" />
+                <HomeMenu imageSource={require('../images/swimming.jpeg')} title="Swimming Pool" />
+                <HomeMenu imageSource={require('../images/group.jpeg')} title="Group Activity" />
             </View>
         </ScrollView>
     );

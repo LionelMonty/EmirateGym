@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import HomePage from '../screens/HomePage';
 import SocialMedia from '../screens/SocialMedia';
@@ -37,7 +37,29 @@ const AppNavigator = () => {
                     tabBarActiveTintColor: '#FF0000',
                     tabBarInactiveTintColor: 'gray',
                 })}>
-                <Tab.Screen name = "Emirate Gym" component = {HomePage} options= {{headerTintColor: '#FF0000', headerTitleStyle: styles.headerTitle}} />
+                <Tab.Screen
+                    name="Emirate Gym"
+                    component={HomePage}
+                    options={{
+                        headerTintColor: '#FF0000',
+                        headerTitleAlign: 'center',
+                        headerTitleStyle: styles.headerTitle,
+                        headerRight: () => (
+                            <View style={styles.headerRightIcon}>  
+                                <TouchableOpacity onPress={() => console.log('Icon pressed')}>
+                                    <Ionicons name="notifications-outline" size={25} color="black" style={{ marginRight: 10 }} />
+                                </TouchableOpacity>
+                            </View>      
+                        ),
+                        headerLeft: () => (
+                            <View style={styles.headerLeftIcon}> 
+                                <TouchableOpacity onPress={() => console.log('Icon pressed')}>
+                                    <Ionicons name="options-outline" size={25} color="black" style={{ marginRight: 10 }} />
+                                </TouchableOpacity>
+                            </View>
+                        ),
+                    }}
+                />
                 <Tab.Screen name = "Feed" component = {SocialMedia} options= {{headerTintColor: '#FF0000', headerTitleStyle: styles.headerTitle}} />
                 <Tab.Screen name = "Camera" component = {Camera} options= {{headerTintColor: '#FF0000', headerTitleStyle: styles.headerTitle}} />
                 <Tab.Screen name = "Membership" component = {Membership} options= {{headerTintColor: '#FF0000', headerTitleStyle: styles.headerTitle}} />
@@ -49,9 +71,15 @@ const AppNavigator = () => {
 
 const styles = StyleSheet.create({
     headerTitle: {
-      fontFamily: 'Cinzel_600SemiBold',
+      fontFamily: 'Merriweather_700Bold',
       fontSize: 26,
     },
+    headerRightIcon: {
+        marginRight: 10,  
+    },
+    headerLeftIcon: {
+        marginLeft: 20,
+    }
   });
 
 export default AppNavigator;

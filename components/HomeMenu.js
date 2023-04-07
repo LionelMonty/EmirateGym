@@ -4,9 +4,12 @@ const HomeMenu = (props) => {
     const { imageSource, title } = props;
 
     return (
-        <View style={styles.card_rectangle}>
-            <Image source={imageSource} style={styles.image} />
-            <Text style={styles.card_title}>{styles.title}</Text>
+        <View>
+            <Text style={styles.card_title}>{title}</Text>
+            <View style={styles.card_rectangle}>
+                <Image source={imageSource} style={styles.image} />
+                
+            </View>
         </View>
     );
 };
@@ -19,12 +22,17 @@ const styles = StyleSheet.create({
         height: 190,
         width: '100%',
         marginBottom: 20, 
-        borderWidth: 1,
-        borderColor: 'black',
+        borderRadius: 10,
     },
     image:{
         width: '100%',
         height: '100%',
+        borderRadius: 10,
+    },
+    card_title: {
+        paddingBottom: 10,
+        fontSize: 24,
+        fontFamily: 'Merriweather_400Regular',
     }
 
 });

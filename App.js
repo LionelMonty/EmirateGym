@@ -4,6 +4,7 @@ import AppNavigator from "./navigation/AppNavigator";
 import { useFonts, Fruktur_400Regular } from "@expo-google-fonts/fruktur";
 import { Cinzel_600SemiBold } from "@expo-google-fonts/cinzel";
 import { Roboto_500Medium } from "@expo-google-fonts/roboto";
+import { Merriweather_400Regular, Merriweather_700Bold } from "@expo-google-fonts/merriweather";
 
 export default function App() {
 
@@ -11,6 +12,8 @@ export default function App() {
     Fruktur_400Regular,
     Cinzel_600SemiBold,
     Roboto_500Medium,
+    Merriweather_400Regular,
+    Merriweather_700Bold
   });
 
   if(!fontsLoaded) return null;

@@ -7,8 +7,7 @@ const HomeMenu = (props) => {
         <View>
             <Text style={styles.card_title}>{title}</Text>
             <View style={styles.card_rectangle}>
-                <Image source={imageSource} style={styles.image} />
-                
+                <Image source={imageSource} style={styles.image} />   
             </View>
         </View>
     );
@@ -21,7 +20,7 @@ const styles = StyleSheet.create({
     card_rectangle: {
         height: 190,
         width: '100%',
-        marginBottom: 20, 
+        marginBottom: 30, 
         borderRadius: 10,
     },
     image:{

@@ -7,6 +7,7 @@ import Camera from '../screens/Camera';
 import Membership from '../screens/Membership';
 import Profile from '../screens/Profile';
 
+
 const Tab = createBottomTabNavigator();
 
 const BottomNavigation = () => {
@@ -38,11 +39,10 @@ const BottomNavigation = () => {
                 tabBarInactiveTintColor: 'gray',
             })}>
             <Tab.Screen name="Emirate Gym" component={HomePage} options={{ headerShown: false }} />
-            <Tab.Screen name = "Feed" component = {SocialMedia} options= {{headerShown: false}} />
-            <Tab.Screen name = "Camera" component = {Camera} options= {{headerShown: false}} />
-            <Tab.Screen name = "Membership" component = {Membership} options= {{headerShown: false}} />
-            <Tab.Screen name = "Profile" component = {Profile} options= {{headerShown: false}} />
-            
+            <Tab.Screen name = "Feed" component = {SocialMedia} />
+            <Tab.Screen name = "Camera" component = {Camera} />
+            <Tab.Screen name = "Membership" component = {Membership} />
+            <Tab.Screen name = "Profile" component = {Profile} />
         </Tab.Navigator>
 
     );

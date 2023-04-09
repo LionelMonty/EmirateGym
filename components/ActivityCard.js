@@ -1,15 +1,19 @@
 import {View, StyleSheet, ScrollView} from 'react-native';
 import HomeMenu from "./HomeMenu";
+import HomeHeader from './Header/HomeHeader';
 
 const ActivityCard = () => {
     return (
-        <ScrollView>
-            <View style={styles.card}>
-                <HomeMenu imageSource={require('../images/gymRoom.jpg')} title="Gym" />
-                <HomeMenu imageSource={require('../images/swimming.jpeg')} title="Swimming Pool" />
-                <HomeMenu imageSource={require('../images/group.jpeg')} title="Group Activity" />
-            </View>
-        </ScrollView>
+        <>
+            <HomeHeader/>
+            <ScrollView>
+                <View style={styles.card}>
+                    <HomeMenu imageSource={require('../images/gymRoom.jpg')} title="Gym" />
+                    <HomeMenu imageSource={require('../images/swimming.jpeg')} title="Swimming Pool" />
+                    <HomeMenu imageSource={require('../images/group.jpeg')} title="Group Activity" />
+                </View>
+            </ScrollView>
+        </>
     );
 }
 

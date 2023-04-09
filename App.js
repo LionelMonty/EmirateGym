@@ -1,7 +1,6 @@
 import { StyleSheet} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaView } from "react-native-safe-area-context";
-import AppNavigator1 from "./navigation/AppNavigator1";
+import AppNavigator from "./navigation/AppNavigator";
 import { useFonts, Fruktur_400Regular } from "@expo-google-fonts/fruktur";
 import { Cinzel_600SemiBold } from "@expo-google-fonts/cinzel";
 import { Roboto_500Medium } from "@expo-google-fonts/roboto";
@@ -21,10 +20,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-
-        <AppNavigator1/>
-
-      
+        <AppNavigator/>
     </SafeAreaView>
   );
 }

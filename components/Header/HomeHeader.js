@@ -1,6 +1,5 @@
 import { StyleSheet, View, Image, Text } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
-import NotificationPage from '../../screens/NotificationPage';
 import { useNavigation } from '@react-navigation/native';
 
 const HomeHeader = () => {

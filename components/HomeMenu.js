@@ -1,14 +1,23 @@
-import { StyleSheet, View, Image, Text } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
+import {  useNavigation } from '@react-navigation/native';
 
 const HomeMenu = (props) => {
-    const { imageSource, title } = props;
+    const { imageSource, title, page } = props;
+
+    const navigation = useNavigation();
+
+    const navigateToActivity = () => {
+        navigation.navigate(page); 
+    }
 
     return (
-        <View>
+        <View> 
             <Text style={styles.card_title}>{title}</Text>
-            <View style={styles.card_rectangle}>
-                <Image source={imageSource} style={styles.image} />   
-            </View>
+            <TouchableOpacity onPress={navigateToActivity}>
+                <View style={styles.card_rectangle}>
+                    <Image source={imageSource} style={styles.image} />   
+                </View>
+            </TouchableOpacity>
         </View>
     );
 };

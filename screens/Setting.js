@@ -10,7 +10,7 @@ const Setting = () => {
         <View style={styles.container}>
             <TouchableOpacity
                 style={styles.componentContainer}
-                onPress={() => navigation.navigate('Emirate Gym')}>
+                onPress={() => navigation.navigate('Home')}>
                 <Ionicons name="home" size={24} color="black" style={styles.componentIcon} />
                 <Text style={styles.componentText}>Home</Text>
             </TouchableOpacity>

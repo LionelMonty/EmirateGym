@@ -5,6 +5,9 @@ import { useFonts, Fruktur_400Regular } from "@expo-google-fonts/fruktur";
 import { Cinzel_600SemiBold } from "@expo-google-fonts/cinzel";
 import { Roboto_500Medium } from "@expo-google-fonts/roboto";
 import { Merriweather_400Regular, Merriweather_700Bold } from "@expo-google-fonts/merriweather";
+import BottomNavigation from './navigation/BottomNavigation';
+import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/SignupScreen';
 
 export default function App() {
 
@@ -20,7 +23,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-        <AppNavigator/>
+        <BottomNavigation/>
     </SafeAreaView>
   );
 }

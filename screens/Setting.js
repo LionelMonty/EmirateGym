@@ -1,37 +1,50 @@
 import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import {Ionicons} from '@expo/vector-icons';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
-const Setting = () => {
+const Setting = props => {
     
-    const navigation = useNavigation();
+    const {logout} = useContext(AuthContext);
+
+    const logoutUser = () => {
+        logout()
+        .then(() => console.log('user logout'))
+        .catch(error => console.log(error));
+    };
 
     return (
+
         <View style={styles.container}>
+
             <TouchableOpacity
                 style={styles.componentContainer}
-                onPress={() => navigation.navigate('Home')}>
-                <Ionicons name="home" size={24} color="black" style={styles.componentIcon} />
-                <Text style={styles.componentText}>Home</Text>
+                onPress={logoutUser}>
+                <Ionicons name="log-out-outline" size={24} color="black" style={styles.componentIcon} />
+                <Text style={styles.componentText}>Logout</Text>
             </TouchableOpacity>
+
             <TouchableOpacity
                 style={styles.componentContainer}
-                onPress={() => navigation.navigate('Feed')}>
+                onPress={() => props.navigation.navigate('Feed')}>
                 <Ionicons name="newspaper" size={24} color="black" style={styles.componentIcon} />
                 <Text style={styles.componentText}>Feed</Text>
             </TouchableOpacity>
+
             <TouchableOpacity
                 style={styles.componentContainer}
-                onPress={() => navigation.navigate('Camera')}>
+                onPress={() => props.navigation.navigate('Camera')}>
                 <Ionicons name="camera" size={24} color="black" style={styles.componentIcon} />
                 <Text style={styles.componentText}>Camera</Text>
             </TouchableOpacity>
+
             <TouchableOpacity
                 style={styles.componentContainer}
-                onPress={() => navigation.navigate('Membership')}>
+                onPress={() => props.navigation.navigate('Membership')}>
                 <Ionicons name="person-circle" size={24} color="black" style={styles.componentIcon} />
                 <Text style={styles.componentText}>Membership</Text>
             </TouchableOpacity>
+
         </View>
     );
 }

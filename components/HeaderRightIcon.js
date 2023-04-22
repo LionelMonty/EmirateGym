@@ -2,7 +2,6 @@ import React from 'react';
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {  useNavigation } from '@react-navigation/native';
-import NotificationPage from '../screens/NotificationPage';
 
 const HeaderRightIcon = () => {
 

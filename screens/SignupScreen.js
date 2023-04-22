@@ -1,7 +1,7 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import React, {useState} from 'react';
+import { View, Text, TextInput, TouchableOpacity, ImageBackground, StyleSheet, Alert } from 'react-native';
+import React, {useState, useContext} from 'react';
 import {auth} from '../config/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { AuthContext } from '../context/AuthContext';
 import {emailRegex, passwordRegex, nameRegex} from '../regex/RegularExpression';
 
 const SignupScreen = props => {
@@ -11,26 +11,28 @@ const SignupScreen = props => {
   const [password,setPassword] = useState('');
   const [confirmPassword,setConfirmPassword] = useState('');
 
+  const {signup} = useContext(AuthContext);
+
   const validateInput = () => {
     let isValid = true;
 
     if (!nameRegex.test(user)) {
-      alert('Invalid name');
+      Alert.alert('Error','Invalid name');
       isValid = false;
     }
     
-    if (!emailRegex.test(email)) {
-      alert('Invalid email address');
+    else if (!emailRegex.test(email)) {
+      Alert.alert('Error','Invalid email address');
       isValid = false;;
     }
 
-    if (!passwordRegex.test(password)) {
-      alert('Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, and one numeric digit');
+    else if (!passwordRegex.test(password)) {
+      Alert.alert('Error','Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, and one numeric digit');
       isValid = false;;
     }
     
-    if (password !== confirmPassword) {
-      alert('Passwords do not match');
+    else if (password !== confirmPassword) {
+      Alert.alert('Error','Passwords do not match');
       isValid = false;;
     } 
 
@@ -38,8 +40,7 @@ const SignupScreen = props => {
   };
 
   const createUser = () => {
-    console.log(email, password);
-    createUserWithEmailAndPassword (auth, email, password)
+    signup (email, password)
     .then(() => {
       console.log('user created');
       props.navigation.navigate('Login');
@@ -59,36 +60,46 @@ const SignupScreen = props => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.logo}>Emirate Gym</Text>
-      <View style={styles.inputView}>
-        <TextInput style={styles.inputText} placeholder="Full Name" value={user} onChangeText={user => setUser(user)} placeholderTextColor="#003f5c" />
+    <ImageBackground source={require('../images/l9.jpeg')} style={styles.background}>
+      <View style={styles.overlay} />
+      <View style={styles.container}>
+        <Text style={styles.logo}>Emirate Gym</Text>
+        <View style={styles.inputView}>
+          <TextInput style={styles.inputText} placeholder="Full Name" value={user} onChangeText={user => setUser(user)} placeholderTextColor="#003f5c" />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput style={styles.inputText} placeholder="Email" value={email} onChangeText={email => setEmail(email)} placeholderTextColor="#003f5c" />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput style={styles.inputText} placeholder="Password" value={password} onChangeText={password => setPassword(password)} placeholderTextColor="#003f5c" secureTextEntry={true} />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput style={styles.inputText} placeholder="Confirm Password" value={confirmPassword} onChangeText={confirmPassword => setConfirmPassword(confirmPassword)} placeholderTextColor="#003f5c" secureTextEntry={true} />
+        </View>
+        <TouchableOpacity style={styles.signupBtn}>
+          <Text style={styles.signupText} onPress = {signUpUser}>SIGNUP</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { props.navigation.navigate('Login') }}>
+          <Text style={styles.loginText}>Already have an account? Login</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.inputView}>
-        <TextInput style={styles.inputText} placeholder="Email" value={email} onChangeText={email => setEmail(email)} placeholderTextColor="#003f5c" />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput style={styles.inputText} placeholder="Password" value={password} onChangeText={password => setPassword(password)} placeholderTextColor="#003f5c" secureTextEntry={true} />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput style={styles.inputText} placeholder="Confirm Password" value={confirmPassword} onChangeText={confirmPassword => setConfirmPassword(confirmPassword)} placeholderTextColor="#003f5c" secureTextEntry={true} />
-      </View>
-      <TouchableOpacity style={styles.signupBtn}>
-        <Text style={styles.signupText} onPress = {signUpUser}>SIGNUP</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { props.navigation.navigate('Login') }}>
-        <Text style={styles.loginText}>Already have an account? Login</Text>
-      </TouchableOpacity>
-    </View>
+    </ImageBackground>
   );
 };
 
 export default SignupScreen;
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
-    backgroundColor: '#fff',
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+  },
+  container: {
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -125,7 +136,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   loginText: {
-    color: '#003f5c',
+    color: '#fff',
   },
 });
 

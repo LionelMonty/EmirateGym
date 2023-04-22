@@ -1,13 +1,11 @@
-import { StyleSheet} from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
-import AppNavigator from "./navigation/AppNavigator";
 import { useFonts, Fruktur_400Regular } from "@expo-google-fonts/fruktur";
 import { Cinzel_600SemiBold } from "@expo-google-fonts/cinzel";
 import { Roboto_500Medium } from "@expo-google-fonts/roboto";
 import { Merriweather_400Regular, Merriweather_700Bold } from "@expo-google-fonts/merriweather";
 import BottomNavigation from './navigation/BottomNavigation';
-import LoginScreen from './screens/LoginScreen';
-import SignupScreen from './screens/SignupScreen';
+import { AuthContextProvider } from './context/AuthContext';
 
 export default function App() {
 
@@ -22,8 +20,11 @@ export default function App() {
   if(!fontsLoaded) return null;
 
   return (
+    
     <SafeAreaView style={styles.container}>
+      <AuthContextProvider>
         <BottomNavigation/>
+      </AuthContextProvider>
     </SafeAreaView>
   );
 }

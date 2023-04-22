@@ -8,8 +8,10 @@ import Profile from '../screens/Profile';
 import { NavigationContainer } from "@react-navigation/native";
 import AppNavigator from './AppNavigator';
 import LogNavigator from './LogNavigator';
+import {  useContext } from 'react';
 
 import { createStackNavigator } from "@react-navigation/stack";
+import { AuthContext } from '../context/AuthContext';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -50,14 +52,16 @@ const Home = () => {
 };
 
 const BottomNavigation = () => {
-
+    const {userAccount} = useContext(AuthContext);
     return(
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name = 'Auth' component= {LogNavigator} options={{ headerShown: false }}/>
-                <Stack.Screen name = 'Main' component= {Home} options={{ headerShown: false }}/>
-          </Stack.Navigator>
-            
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+                {userAccount ? (
+                    <Stack.Screen name = 'Main' component= {Home} />
+                ) : (
+                    <Stack.Screen name = 'Auth' component= {LogNavigator} />
+                )}
+          </Stack.Navigator>           
         </NavigationContainer>
     );
 }

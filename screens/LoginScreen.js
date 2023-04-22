@@ -1,17 +1,20 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import React, {useState} from 'react';
-import {auth} from '../config/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground  } from 'react-native';
+import React, {useState, useContext} from 'react';
+import { AuthContext } from '../context/AuthContext';
 const LoginScreen = props => {
 
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
 
+  const {login} = useContext(AuthContext);
+
   const loginUser = () => {
-    signInWithEmailAndPassword (auth, email, password)
+    login (email, password)
     .then(() => {
       console.log('user logged In');
-      props.navigation.navigate('Main');
+      setEmail('');
+      setPassword('');
+      props.navigation.replace('Main');
     })
     .catch(error => {
       if (error.code === 'auth/user-not-found'){
@@ -27,30 +30,40 @@ const LoginScreen = props => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.logo}>Emirate Gym</Text>
-      <View style={styles.inputView}>
-        <TextInput style={styles.inputText} placeholder="Email" value={email} onChangeText={email => setEmail(email)} placeholderTextColor="#003f5c" autoCapitalize='none' />
+    <ImageBackground source={require('../images/l6.jpeg')} style={styles.background}>
+      <View style={styles.overlay} />
+      <View style={styles.container}>
+        <Text style={styles.logo}>Emirate Gym</Text>
+        <View style={styles.inputView}>
+          <TextInput style={styles.inputText} placeholder="Email" value={email} onChangeText={email => setEmail(email)} placeholderTextColor="#003f5c" autoCapitalize='none' />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput style={styles.inputText} placeholder="Password" value={password} onChangeText={password => setPassword(password)} placeholderTextColor="#003f5c" secureTextEntry={true} />
+        </View>
+        <TouchableOpacity style={styles.loginBtn} onPress={ loginUser}>
+          <Text style={styles.loginText}>LOGIN</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { props.navigation.navigate('SignUp'); }}>
+          <Text style={styles.signupText}>Don't have an account? Signup</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.inputView}>
-        <TextInput style={styles.inputText} placeholder="Password" value={password} onChangeText={password => setPassword(password)} placeholderTextColor="#003f5c" secureTextEntry={true} />
-      </View>
-      <TouchableOpacity style={styles.loginBtn} onPress={ loginUser}>
-        <Text style={styles.loginText}>LOGIN</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { props.navigation.navigate('SignUp'); }}>
-        <Text style={styles.signupText}>Signup</Text>
-      </TouchableOpacity>
-    </View>
+    </ImageBackground>
   );
 };
 
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
-    backgroundColor: '#fff',
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+  },
+  container: {
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -87,6 +100,6 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   signupText: {
-    color: '#003f5c',
+    color: '#fff',
   },
 });

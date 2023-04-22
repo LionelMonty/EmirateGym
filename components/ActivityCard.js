@@ -8,8 +8,8 @@ const ActivityCard = () => {
             <HomeHeader/>
             <ScrollView>
                 <View style={styles.card}>
-                    <HomeMenu imageSource={require('../images/gymRoom.jpg')} title="Gym" page = 'Settings'/>
-                    <HomeMenu imageSource={require('../images/swimming.jpeg')} title="Swimming Pool" page = 'Settings'/>
+                    <HomeMenu imageSource={require('../images/gymRoom.jpg')} title="Gym" page = 'Time Slot'/>
+                    <HomeMenu imageSource={require('../images/swimming.jpeg')} title="Swimming Pool" page = 'Time Slot'/>
                     <HomeMenu imageSource={require('../images/group.jpeg')} title="Group Activity" page = 'Group Activities'/>
                 </View>
             </ScrollView>

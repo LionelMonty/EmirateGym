@@ -3,16 +3,18 @@ import NotificationPage from "../screens/NotificationPage";
 import Setting from "../screens/Setting";
 import GroupActivity from "../screens/GroupActivity";
 import HomePage from "../screens/HomePage";
+import TimeSlotScreen from "../screens/TimeSlotScreen";
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
     return(
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#ff0000', }, headerTintColor: 'white', }}>
             <Stack.Screen name = 'Home' component= {HomePage} options={{ headerShown: false}}/>
-            <Stack.Screen name = 'Notification' component= {NotificationPage} options={{ headerStyle: { backgroundColor: '#ff0000', }, headerTintColor: 'white', }}/>
-            <Stack.Screen name = 'Settings' component= {Setting} options={{ headerStyle: { backgroundColor: '#ff0000', }, headerTintColor: 'white', }}/>
-            <Stack.Screen name = 'Group Activities' component= {GroupActivity} options={{ headerStyle: { backgroundColor: '#ff0000', }, headerTintColor: 'white', }}/>
+            <Stack.Screen name = 'Notification' component= {NotificationPage} />
+            <Stack.Screen name = 'Settings' component= {Setting} />
+            <Stack.Screen name = 'Group Activities' component= {GroupActivity} />
+            <Stack.Screen name = 'Time Slot' component= {TimeSlotScreen} />
         </Stack.Navigator>
     );
 }

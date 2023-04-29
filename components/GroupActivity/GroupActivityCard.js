@@ -1,16 +1,25 @@
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import React from 'react';
+import {  useNavigation } from '@react-navigation/native';
 
 const windowWidth = Dimensions.get('window').width;
 
 const GroupActivityCard = (props) => {
-  const { GroupActivityImage, GroupActivityTtile } = props;
+  const { GroupActivityImage, GroupActivityTtile, pageActivity } = props;
+
+  const navigation = useNavigation();
+  
+  const navigateToTimeSlot = () => {
+    navigation.navigate(pageActivity); 
+  }
 
   return (
-        <View style={styles.box}>
-            <Image style={styles.image} source={GroupActivityImage} />
-            <Text style={styles.boxTitle}>{GroupActivityTtile}</Text>
-        </View>
+    <TouchableOpacity onPress={navigateToTimeSlot}>
+      <View style={styles.box}> 
+        <Image style={styles.image} source={GroupActivityImage} />
+        <Text style={styles.boxTitle}>{GroupActivityTtile}</Text>
+      </View>
+    </TouchableOpacity>
   )
 }
 

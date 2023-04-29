@@ -1,6 +1,17 @@
 import { StyleSheet, View, Text } from 'react-native';
 import React, { useState,useEffect } from 'react';
 
+export const getFormattedDate = (date) => {
+        const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const monthsOfYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const dayOfWeek = daysOfWeek[date.getDay()];
+        const dayOfMonth = date.getDate();
+        const monthOfYear = monthsOfYear[date.getMonth()];
+        const year = date.getFullYear();
+        return `${dayOfWeek} ${dayOfMonth} ${monthOfYear} ${year}`;
+    }
+    
+
 const DateString = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
     
@@ -12,16 +23,6 @@ const DateString = () => {
       useEffect(() => {
         updateCurrentDate();
     }, []);
-    
-    const getFormattedDate = (date) => {
-        const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        const monthsOfYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const dayOfWeek = daysOfWeek[date.getDay()];
-        const dayOfMonth = date.getDate();
-        const monthOfYear = monthsOfYear[date.getMonth()];
-        const year = date.getFullYear();
-        return `${dayOfWeek} ${dayOfMonth} ${monthOfYear} ${year}`;
-    }
 
     return (
         <View style={styles.container}>

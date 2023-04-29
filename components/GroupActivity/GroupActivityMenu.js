@@ -7,10 +7,10 @@ const GroupActivityMenu = () => {
     <ScrollView>
         <View style={styles.container}>
           <View style={styles.row}>
-            <GroupActivityCard GroupActivityImage = {require('../../images/spinning.jpg')} GroupActivityTtile = "Spinning"/>
-            <GroupActivityCard GroupActivityImage = {require('../../images/abs.jpg')} GroupActivityTtile = "Thighs abd glutes"/>
-            <GroupActivityCard GroupActivityImage = {require('../../images/water.jpg')} GroupActivityTtile = "Water aerobics"/>
-            <GroupActivityCard GroupActivityImage = {require('../../images/zumba6.jpg')} GroupActivityTtile = "Zumba"/>
+            <GroupActivityCard GroupActivityImage = {require('../../images/spinning.jpg')} GroupActivityTtile = "Spinning" pageActivity = "Time Slot"/>
+            <GroupActivityCard GroupActivityImage = {require('../../images/abs.jpg')} GroupActivityTtile = "Thighs abd glutes" pageActivity = "Time Slot"/>
+            <GroupActivityCard GroupActivityImage = {require('../../images/water.jpg')} GroupActivityTtile = "Water aerobics" pageActivity = "Time Slot"/>
+            <GroupActivityCard GroupActivityImage = {require('../../images/zumba6.jpg')} GroupActivityTtile = "Zumba" pageActivity = "Time Slot"/>
           </View>
         </View>
     </ScrollView>

@@ -18,7 +18,7 @@ export default BoxSlot;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: 'red',
     borderRadius: 8,
     paddingHorizontal: 16,
     paddingVertical: 15,
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   timeText: {
     fontSize: 16,
     fontWeight: 'bold',
+    color:'white',
   },
 });
 

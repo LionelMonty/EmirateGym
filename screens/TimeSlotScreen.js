@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+
 import TimeSlotMain from '../components/TimeSlot/TimeSlotMain';
 
 const TimeSlotScreen = () => {
@@ -7,11 +7,5 @@ const TimeSlotScreen = () => {
     );
 };
 
-const styles = StyleSheet.create({
-    mainContainer: {
-        backgroundColor: '#fff',
-
-      },
-});
 
 export default TimeSlotScreen;

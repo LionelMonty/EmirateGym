@@ -19,6 +19,17 @@ const timeSlots = [
     { id: '13', timeText: '19h00 - 20h00' },
 ];
 
+const TimeSlotMain = () => {
+    
+const [selectedTime, setSelectedTime] = useState(null);
+
+const handleTimeSlotPress = (time) => {
+  setSelectedTime(time);
+}
+
+//display time
+console.log(selectedTime);
+
 //import name of day
 const nameOfDay = getFormattedDate(new Date()).split(" ")[0];
 console.log(nameOfDay);
@@ -32,17 +43,6 @@ const checkDay = () => {
     return timeSlots;
   }
 }
-
-const TimeSlotMain = () => {
-    
-const [selectedTime, setSelectedTime] = useState(null);
-
-const handleTimeSlotPress = (time) => {
-  setSelectedTime(time);
-}
-
-//display time
-console.log(selectedTime);
 
   return (
     <ScrollView>

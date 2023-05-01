@@ -4,6 +4,7 @@ import Setting from "../screens/Setting";
 import GroupActivity from "../screens/GroupActivity";
 import HomePage from "../screens/HomePage";
 import TimeSlotScreen from "../screens/TimeSlotScreen";
+import Reservation from "../screens/Reservation";
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ const AppNavigator = () => {
             <Stack.Screen name = 'Settings' component= {Setting} />
             <Stack.Screen name = 'Group Activities' component= {GroupActivity} />
             <Stack.Screen name = 'Time Slot' component= {TimeSlotScreen} />
+            <Stack.Screen name = 'Reservation' component= {Reservation} />
         </Stack.Navigator>
     );
 }

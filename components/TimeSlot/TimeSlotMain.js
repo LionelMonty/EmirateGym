@@ -2,6 +2,7 @@ import { View, ScrollView, TouchableOpacity } from 'react-native'
 import DateString, {getFormattedDate} from './DateString'
 import BoxSlot from './BoxSlot'
 import React, { useState } from 'react';
+import {  useNavigation } from '@react-navigation/native';
 
 const timeSlots = [
     { id: '1', timeText: '7h00 - 8h00' },
@@ -19,43 +20,44 @@ const timeSlots = [
     { id: '13', timeText: '19h00 - 20h00' },
 ];
 
-const TimeSlotMain = () => {
-    
-const [selectedTime, setSelectedTime] = useState(null);
+const TimeSlotMain = props => {
+  const navigation = useNavigation();
+  const [selectedTime, setSelectedTime] = useState(null);
 
-const handleTimeSlotPress = (time) => {
-  setSelectedTime(time);
-}
-
-//display time
-console.log(selectedTime);
-
-//import name of day
-const nameOfDay = getFormattedDate(new Date()).split(" ")[0];
-console.log(nameOfDay);
-
-const checkDay = () => {
-  if (nameOfDay === 'Saturday') {
-    return timeSlots.slice(0, 11);
-  } else if (nameOfDay === 'Sunday') {
-    return timeSlots.slice(0, 5);
-  } else {
-    return timeSlots;
+  const handleTimeSlotPress = (time) => {
+    setSelectedTime(time);
+    navigation.navigate('Reservation');
   }
-}
 
-  return (
-    <ScrollView>
-        <View>
-            <DateString/>
-            {checkDay().map((item) => (
-              <TouchableOpacity key={item.id} onPress={() => handleTimeSlotPress(item.timeText)}>
-                <BoxSlot timeText={item.timeText} />
-              </TouchableOpacity>
-            ))}
-        </View>
-    </ScrollView>
-  )
+  //display time
+  console.log(selectedTime);
+
+  //import name of day
+  const nameOfDay = getFormattedDate(new Date()).split(" ")[0];
+  console.log(nameOfDay);
+
+  const checkDay = () => {
+    if (nameOfDay === 'Saturday') {
+      return timeSlots.slice(0, 11);
+    } else if (nameOfDay === 'Sunday') {
+      return timeSlots.slice(0, 5);
+    } else {
+      return timeSlots;
+    }
+  }
+
+    return (
+      <ScrollView>
+          <View>
+              <DateString/>
+              {checkDay().map((item) => (
+                <TouchableOpacity key={item.id} onPress={() => handleTimeSlotPress(item.timeText)}>
+                  <BoxSlot timeText={item.timeText} />
+                </TouchableOpacity>
+              ))}
+          </View>
+      </ScrollView>
+    )
 }
 
 export default TimeSlotMain

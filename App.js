@@ -6,7 +6,6 @@ import { Roboto_500Medium } from "@expo-google-fonts/roboto";
 import { Merriweather_400Regular, Merriweather_700Bold } from "@expo-google-fonts/merriweather";
 import BottomNavigation from './navigation/BottomNavigation';
 import { AuthContextProvider } from './context/AuthContext';
-import Reservation from './screens/Reservation';
 
 export default function App() {
 
@@ -24,7 +23,7 @@ export default function App() {
     
     <SafeAreaView style={styles.container}>
       <AuthContextProvider>
-        <Reservation/>
+        <BottomNavigation/>
       </AuthContextProvider>
     </SafeAreaView>
   );

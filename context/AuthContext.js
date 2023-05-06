@@ -28,6 +28,7 @@ export const AuthContextProvider = ({children}) => {
         });
     }, []);
 
+    
     return(
         <AuthContext.Provider value = {{ userAccount, signup, login, logout }}>
             <>

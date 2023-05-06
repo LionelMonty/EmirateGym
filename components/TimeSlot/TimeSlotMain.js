@@ -1,7 +1,7 @@
 import { View, ScrollView, TouchableOpacity } from 'react-native'
 import DateString, {getFormattedDate} from './DateString'
 import BoxSlot from './BoxSlot'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {  useNavigation } from '@react-navigation/native';
 
 const timeSlots = [
@@ -20,13 +20,29 @@ const timeSlots = [
     { id: '13', timeText: '19h00 - 20h00' },
 ];
 
+let tempTitle = '';
+
+export const navTitle = (title) =>{
+  tempTitle = title;
+  return tempTitle;
+}
+
+
+
 const TimeSlotMain = props => {
   const navigation = useNavigation();
   const [selectedTime, setSelectedTime] = useState(null);
 
+
   const handleTimeSlotPress = (time) => {
     setSelectedTime(time);
-    navigation.navigate('Reservation');
+    if (tempTitle === 'Gym') {
+      navigation.navigate('Reservation');
+    }
+    if (tempTitle === 'Swimming Pool') {
+      navigation.navigate('Swimming Reservation');
+    }
+    
   }
 
   //display time

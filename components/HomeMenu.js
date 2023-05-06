@@ -1,15 +1,19 @@
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import {  useNavigation } from '@react-navigation/native';
+import { navTitle } from './TimeSlot/TimeSlotMain';
+
 
 const HomeMenu = (props) => {
     const { imageSource, title, page } = props;
-
+    
     const navigation = useNavigation();
 
     const navigateToActivity = () => {
         navigation.navigate(page); 
+        navTitle(title);
     }
-
+   
+    
     return (
         <View> 
             <Text style={styles.card_title}>{title}</Text>

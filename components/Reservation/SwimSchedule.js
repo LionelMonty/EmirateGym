@@ -6,11 +6,12 @@ const responsiveWidth = width * 0.9; // 90% of the screen width
 const responsiveHeight = height * 0.3; // 25% of the screen height
 
 const SwimSchedule = () => {
-    const data = Array.from({ length: 28 }, (_, index) => ({ id: index }));
+
+    const data = Array.from({ length: 8 }, (_, index) => ({ id: index }));
 
     const renderItem = ({ item }) => {
         let boxColor = 'rgba(245, 245, 245, 0.4)';
-        if (item.id < 20) {
+        if (item.id < 3) {
             boxColor = 'rgba(0, 255, 0, 0.3)';
         }
         return (
@@ -20,10 +21,10 @@ const SwimSchedule = () => {
 
     return (
         <View style={styles.main_container}>
-            <ImageBackground style={styles.background_container} source={require('../../images/gf.jpg')}>
+            <ImageBackground style={styles.background_container} source={require('../../images/sp.jpg')}>
                 <View style={styles.main}>
                     <View style={styles.main_smallBox}>
-                        <FlatList data={data} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={7} />
+                        <FlatList data={data} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={2} />
                     </View>
                 </View>
             </ImageBackground>
@@ -35,6 +36,7 @@ export default SwimSchedule;
 
 const styles = StyleSheet.create({
     main_container: {
+        backgroundColor:'red',
         height: responsiveHeight,
         width: responsiveWidth,
         alignItems: 'center',
@@ -44,12 +46,14 @@ const styles = StyleSheet.create({
     },
     background_container:{
         flex: 1,
+        width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 20,
         
     },
     main:{
+        width: '100%',
         backgroundColor: 'rgba(245, 245, 245, 0.4)',
         height:'100%',
         justifyContent: 'center',
@@ -63,8 +67,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     smallBox: {
-        width: '12.5%',
-        aspectRatio: 1,
+        width: '48%',
+        aspectRatio: 8/2,
         borderRadius: 10,
         margin: 2.5,
         justifyContent: 'center',

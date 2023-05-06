@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import ViewSchedule from '../components/Reservation/ViewSchedule';
 import LabelSchedule from '../components/Reservation/LabelSchedule';
 import MainStats from '../components/Reservation/MainStats';
+import BookNowBtn from '../components/Reservation/BookNowBtn';
 
 const Reservation = () => {
     return (
@@ -11,9 +12,7 @@ const Reservation = () => {
                 <ViewSchedule/>
                 <LabelSchedule/>
                 <MainStats/>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Book Now</Text>
-                </TouchableOpacity>
+                <BookNowBtn/>
             </View>
     )
 }

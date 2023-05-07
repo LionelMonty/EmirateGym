@@ -41,11 +41,18 @@ const Home = () => {
                 },
                 tabBarActiveTintColor: '#FF0000',
                 tabBarInactiveTintColor: 'gray',
+                headerStyle: { backgroundColor: '#ff0000', }, 
+                headerTintColor: 'white',
+                headerTitleAlign: 'center',
+                headerTitleStyle: {
+                    fontSize: 20,
+                    fontFamily: 'Merriweather_700Bold'
+                  },
             })}>
             <Tab.Screen name="Emirate Gym" component={AppNavigator} options={{ headerShown: false }} />
             <Tab.Screen name = "Feed" component = {SocialMedia} />
             <Tab.Screen name = "Camera" component = {Camera} />
-            <Tab.Screen name = "Membership" component = {Membership} />
+            <Tab.Screen name = "Membership" component = {Membership} options={{ headerStyle: { backgroundColor: '#ff0000', }, headerTintColor: 'white', }}/>
             <Tab.Screen name = "Profile" component = {Profile} />
         </Tab.Navigator>
     );

@@ -5,7 +5,7 @@ const { width, height } = Dimensions.get('window');
 const responsiveWidth = width * 0.9; // 90% of the screen width
 const responsiveHeight = height * 0.3; // 25% of the screen height
 
-const ViewSchedule = () => {
+const ViewSchedule = (props) => {
 
     const data = Array.from({ length: 28 }, (_, index) => ({ id: index }));
 
@@ -21,7 +21,7 @@ const ViewSchedule = () => {
 
     return (
         <View style={styles.main_container}>
-            <ImageBackground style={styles.background_container} source={require('../../images/gf.jpg')}>
+            <ImageBackground style={styles.background_container} source={props.picture}>
                 <View style={styles.main}>
                     <View style={styles.main_smallBox}>
                         <FlatList data={data} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={7} />

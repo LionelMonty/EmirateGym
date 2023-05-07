@@ -5,19 +5,19 @@ import LabelSchedule from '../components/Reservation/LabelSchedule';
 import MainStats from '../components/Reservation/MainStats';
 import BookNowBtn from '../components/Reservation/BookNowBtn';
 
-const Reservation = () => {
-    return (
-            <View>
-                <Text style={styles.title_container}>Gym Schedule</Text>
-                <ViewSchedule picture={require('../images/gf.jpg')}/>
-                <LabelSchedule/>
-                <MainStats/>
-                <BookNowBtn/>
-            </View>
-    )
+const SpinningReservation = () => {
+  return (
+    <View>
+        <Text style={styles.title_container}>Spinning Schedule</Text>
+        <ViewSchedule picture={require('../images/spin.png')}/>
+        <LabelSchedule/>
+        <MainStats/>
+        <BookNowBtn/>
+    </View>
+  )
 }
 
-export default Reservation;
+export default SpinningReservation;
 
 const styles = StyleSheet.create({
     title_container:{

@@ -1,6 +1,7 @@
 import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import React from 'react';
 import {  useNavigation } from '@react-navigation/native';
+import { navTitle } from '../TimeSlot/TimeSlotMain';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -11,6 +12,7 @@ const GroupActivityCard = (props) => {
   
   const navigateToTimeSlot = () => {
     navigation.navigate(pageActivity); 
+    navTitle(GroupActivityTtile);
   }
 
   return (

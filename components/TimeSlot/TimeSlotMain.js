@@ -42,6 +42,18 @@ const TimeSlotMain = props => {
     if (tempTitle === 'Swimming Pool') {
       navigation.navigate('Swimming Reservation');
     }
+    if (tempTitle === 'Spinning') {
+      navigation.navigate('Spinning Reservation');
+    }
+    if (tempTitle === 'Thighs abd glutes') {
+      navigation.navigate('Thighs abd glutes Reservation');
+    }
+    if (tempTitle === 'Water aerobics') {
+      navigation.navigate('Aerobics Reservation');
+    }
+    if (tempTitle === 'Zumba') {
+      navigation.navigate('Zumba Reservation');
+    }
     
   }
 

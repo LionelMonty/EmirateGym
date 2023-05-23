@@ -3,6 +3,7 @@ import React, {useState, useContext} from 'react';
 import {auth} from '../config/firebase';
 import { AuthContext } from '../context/AuthContext';
 import {emailRegex, passwordRegex, nameRegex} from '../regex/RegularExpression';
+import { AddUser } from '../database/Adding';
 
 const SignupScreen = props => {
 
@@ -41,9 +42,11 @@ const SignupScreen = props => {
 
   const createUser = () => {
     signup (email, password)
-    .then(() => {
+    .then(signUser => {
       console.log('user created');
       props.navigation.navigate('Login');
+      const user_id = signUser.user.uid; //userID
+      AddUser(user_id,user);
     })
     .catch(error => {
       if (error.code === 'auth/email-already-in-use'){

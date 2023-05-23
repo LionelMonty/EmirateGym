@@ -1,7 +1,7 @@
 import { View, ScrollView, TouchableOpacity } from 'react-native'
 import DateString, {getFormattedDate} from './DateString'
 import BoxSlot from './BoxSlot'
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {  useNavigation } from '@react-navigation/native';
 
 const timeSlots = [

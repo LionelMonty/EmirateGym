@@ -17,6 +17,7 @@
     "@react-navigation/drawer": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
+    "date-fns": "^2.30.0",
     "date-fns-timezone": "^0.1.4",
     "expo": "~48.0.10",
     "expo-font": "^11.1.1",

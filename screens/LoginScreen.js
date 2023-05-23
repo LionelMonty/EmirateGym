@@ -1,6 +1,8 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground  } from 'react-native';
 import React, {useState, useContext} from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { currentUserID } from '../database/Adding';
+
 const LoginScreen = props => {
 
   const [email,setEmail] = useState('');
@@ -10,11 +12,13 @@ const LoginScreen = props => {
 
   const loginUser = () => {
     login (email, password)
-    .then(() => {
+    .then(logUser => {
       console.log('user logged In');
       setEmail('');
       setPassword('');
       props.navigation.replace('Main');
+      const actual_user_id = logUser.user.uid; //userID
+      currentUserID(actual_user_id);
     })
     .catch(error => {
       if (error.code === 'auth/user-not-found'){

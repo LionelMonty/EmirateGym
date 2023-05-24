@@ -44,7 +44,6 @@ const SignupScreen = props => {
     signup (email, password)
     .then(signUser => {
       console.log('user created');
-      props.navigation.navigate('Login');
       const user_id = signUser.user.uid; //userID
       AddUser(user_id,user);
     })
@@ -59,7 +58,10 @@ const SignupScreen = props => {
   };
 
   const signUpUser = () => {
-    if (validateInput()) createUser();
+    if (validateInput()) {
+      createUser();
+      props.navigation.navigate('Login');
+    }
   };
 
   return (

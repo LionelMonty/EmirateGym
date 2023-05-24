@@ -1,6 +1,7 @@
-import { View, TextInput, TouchableOpacity, StyleSheet, Image, Text, ScrollView } from 'react-native';
+import { View, TextInput, TouchableOpacity, Alert, StyleSheet, Image, Text, ScrollView } from 'react-native';
 import React from 'react';
 import { Card } from 'react-native-elements';
+import { AddMembership } from '../database/Adding';
 
 let value = {};
 
@@ -9,15 +10,55 @@ export const membershipDetail = (membership) => {
     return value;
 }
 
+const sanitizeInput = (input) => {
+  // Remove any non-numeric characters
+  return input.replace(/[^0-9]/g, '');
+};
+
 const Payment = () => {
 
     const [cardNumber, setCardNumber] = React.useState('');
     const [expirationDate, setExpirationDate] = React.useState('');
     const [cvv, setCvv] = React.useState('');
 
-    const handlePayment = () => {
-        // Perform payment logic here
-    };
+    const validateCardDetails = () => {
+    // Sanitize input
+    const sanitizedCardNumber = sanitizeInput(cardNumber);
+    const sanitizedExpirationDate = sanitizeInput(expirationDate);
+    const sanitizedCvv = sanitizeInput(cvv);
+
+    // Validate Card Number
+    if (!/^\d{16}$/.test(sanitizedCardNumber)) {
+      Alert.alert('Invalid Card Number', 'Please enter a valid 16-digit card number');
+      return;
+    }
+
+    // Validate Expiration Date
+    if (!/^\d{4}$/.test(sanitizedExpirationDate)) {
+      Alert.alert('Invalid Expiration Date', 'Please enter a valid 4-digit expiration date');
+      return;
+    }
+
+    // Perform additional checks on the expiration date if required
+
+    // Validate CVV
+    if (!/^\d{3}$/.test(sanitizedCvv)) {
+      Alert.alert('Invalid CVV', 'Please enter a valid 3-digit CVV');
+      return;
+    }
+
+    // All fields are valid
+    // Process the card details or navigate to the next screen
+    Alert.alert('Success', 'Card details are valid');
+    AddMembership(value.title)
+    setCardNumber('');
+    setExpirationDate('');
+    setCvv('');
+  };
+
+  const handlePayment = () => {
+      validateCardDetails() ;
+  };
 
     return (
       <ScrollView>
@@ -68,7 +109,7 @@ const Payment = () => {
               </Text>
             </View>
         </View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handlePayment}>
             <Text style={styles.buttonText}>Membership</Text>
         </TouchableOpacity>
       </ScrollView>

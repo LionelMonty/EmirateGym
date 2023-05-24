@@ -2,6 +2,7 @@ import { View, TextInput, TouchableOpacity, Alert, StyleSheet, Image, Text, Scro
 import React from 'react';
 import { Card } from 'react-native-elements';
 import { AddMembership } from '../database/Adding';
+import {  useNavigation } from '@react-navigation/native';
 
 let value = {};
 
@@ -20,6 +21,8 @@ const Payment = () => {
     const [cardNumber, setCardNumber] = React.useState('');
     const [expirationDate, setExpirationDate] = React.useState('');
     const [cvv, setCvv] = React.useState('');
+
+    const navigation = useNavigation();
 
     const validateCardDetails = () => {
     // Sanitize input
@@ -54,10 +57,12 @@ const Payment = () => {
     setCardNumber('');
     setExpirationDate('');
     setCvv('');
+    navigation.navigate('Receipt');
   };
 
   const handlePayment = () => {
-      validateCardDetails() ;
+      validateCardDetails();
+      
   };
 
     return (
@@ -174,11 +179,11 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         marginBottom: 25,
-    },
-      buttonText: {
-        color: '#fff',
-        fontSize: 16,
-        textAlign: 'center',
-    },
+      },
+        buttonText: {
+          color: '#fff',
+          fontSize: 16,
+          textAlign: 'center',
+      },
      
   });

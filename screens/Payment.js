@@ -1,4 +1,4 @@
-import { View, TextInput, Button, StyleSheet, Image, Text } from 'react-native';
+import { View, TextInput, TouchableOpacity, StyleSheet, Image, Text, ScrollView } from 'react-native';
 import React from 'react';
 import { Card } from 'react-native-elements';
 
@@ -20,6 +20,7 @@ const Payment = () => {
     };
 
     return (
+      <ScrollView>
         <View style={styles.container}>
            <Text style={styles.containerText}>Set up your credit or debit card</Text>
            <Card containerStyle={styles.cardContainer}>
@@ -60,7 +61,17 @@ const Payment = () => {
                     maxLength={3}
                 />
             </View>
+            <View style={styles.termContainer}>
+              <Text style={styles.termTitle}>Refunds and Cancellations:</Text>
+              <Text style={styles.termParagraph}>
+                Please note that once a reservation is made through the App, it is considered final and non-refundable. We do not offer refunds or cancellations for any gym bookings or membership made through the app. We encourage you to carefully review your reservation details before confirming your booking/membership.
+              </Text>
+            </View>
         </View>
+        <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Membership</Text>
+        </TouchableOpacity>
+      </ScrollView>
     )
 }
 
@@ -103,5 +114,30 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         padding: 8,
       },
+      termContainer: {
+        marginHorizontal:20,
+      },
+      termTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 8,
+      },
+      termParagraph: {
+        fontSize: 12,
+        textAlign:'justify',
+        color:'#444444',
+      },
+      button: {
+        backgroundColor: 'red',
+        marginHorizontal:30,
+        padding: 10,
+        borderRadius: 5,
+        marginBottom: 25,
+    },
+      buttonText: {
+        color: '#fff',
+        fontSize: 16,
+        textAlign: 'center',
+    },
      
   });

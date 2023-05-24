@@ -1,18 +1,25 @@
 import { StyleSheet, Text, Dimensions } from 'react-native';
 import { Card, Button } from 'react-native-elements';
 import { AddMembership } from '../../database/Adding';
+import {  useNavigation } from '@react-navigation/native';
+import { membershipDetail } from '../../screens/Payment';
 
 const { width } = Dimensions.get('window');
 const responsiveWidth = width * 0.9; // 90% of the screen width
 
 
 
+
 const MembershipCard = props => {
 
-  const test = () => {
-    AddMembership(props.membershipTitle);
-  }
+  const navigation = useNavigation();
 
+  const test = () => {
+    const membership = { title: props.membershipTitle, price: props.membershipPrice }
+    membershipDetail(membership);
+    //AddMembership(props.membershipTitle);
+    navigation.navigate('Payment'); 
+  }
 
   return (
     <Card containerStyle={styles.cardContainer}>

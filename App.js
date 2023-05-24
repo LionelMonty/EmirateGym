@@ -6,6 +6,7 @@ import { Roboto_500Medium } from "@expo-google-fonts/roboto";
 import { Merriweather_400Regular, Merriweather_700Bold } from "@expo-google-fonts/merriweather";
 import BottomNavigation from './navigation/BottomNavigation';
 import { AuthContextProvider } from './context/AuthContext';
+import { Kanit_400Regular, Kanit_100Thin } from "@expo-google-fonts/kanit";
 
 export default function App() {
 
@@ -14,7 +15,9 @@ export default function App() {
     Cinzel_600SemiBold,
     Roboto_500Medium,
     Merriweather_400Regular,
-    Merriweather_700Bold
+    Merriweather_700Bold,
+    Kanit_400Regular,
+    Kanit_100Thin,
   });
 
   if(!fontsLoaded) return null;

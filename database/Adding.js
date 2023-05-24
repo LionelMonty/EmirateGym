@@ -1,6 +1,6 @@
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
-import { addMonths } from 'date-fns';
+import { addMonths, addYears } from 'date-fns';
 
 let actualuserID = '';
 
@@ -21,9 +21,15 @@ export const AddUser = async (user_id, user_name) => {
     }
 }
 
-const monthlyMembership = () => {
+const calculateMembership = (monthOrYear) => {
   const currentDate = new Date(); 
-  const newDate = addMonths(currentDate, 1);
+  let newDate;
+  if (monthOrYear == "Monthly") {
+    newDate = addMonths(currentDate, 1);
+  }
+  else{
+    newDate = addYears(currentDate, 1);
+  }
   return newDate;
 }
 
@@ -32,7 +38,7 @@ export const AddMembership = async (pack) => {
       await addDoc(collection(db, "Membership"), {
           userid: actualuserID,
           membershipPackage: pack,
-          date: monthlyMembership(),
+          date: calculateMembership(pack),
       });
       
     } catch (e) {

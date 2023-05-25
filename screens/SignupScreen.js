@@ -1,9 +1,11 @@
 import { View, Text, TextInput, TouchableOpacity, ImageBackground, StyleSheet, Alert } from 'react-native';
 import React, {useState, useContext} from 'react';
-import {auth} from '../config/firebase';
 import { AuthContext } from '../context/AuthContext';
 import {emailRegex, passwordRegex, nameRegex} from '../regex/RegularExpression';
 import { AddUser } from '../database/Adding';
+import { currentUserID } from '../database/Adding';
+import { currentUserID2 } from './Receipt';
+import { currentUserIDUpdate } from '../database/Update';
 
 const SignupScreen = props => {
 
@@ -46,6 +48,9 @@ const SignupScreen = props => {
       console.log('user created');
       const user_id = signUser.user.uid; //userID
       AddUser(user_id,user);
+      currentUserID(user_id);
+      currentUserID2(user_id);
+      currentUserIDUpdate(actual_user_id);
     })
     .catch(error => {
       if (error.code === 'auth/email-already-in-use'){

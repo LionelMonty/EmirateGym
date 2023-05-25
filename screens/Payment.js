@@ -1,7 +1,7 @@
 import { View, TextInput, TouchableOpacity, Alert, StyleSheet, Image, Text, ScrollView } from 'react-native';
 import React from 'react';
 import { Card } from 'react-native-elements';
-import { AddMembership } from '../database/Adding';
+import { AddMembership, checkNotification } from '../database/Adding';
 import {  useNavigation } from '@react-navigation/native';
 
 let value = {};
@@ -52,8 +52,11 @@ const Payment = () => {
 
     // All fields are valid
     // Process the card details or navigate to the next screen
-    Alert.alert('Success', 'Card details are valid');
+    //Alert.alert('Success', 'Card details are valid');
     AddMembership(value.title)
+    const title = "Transaction Successful!";
+    const text = "Congratulations! Your transaction has been successfully completed. Thank you for choosing our services.";
+    checkNotification(title, text);
     setCardNumber('');
     setExpirationDate('');
     setCvv('');
@@ -62,7 +65,6 @@ const Payment = () => {
 
   const handlePayment = () => {
       validateCardDetails();
-      
   };
 
     return (

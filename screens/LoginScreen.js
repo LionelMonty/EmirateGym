@@ -2,6 +2,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackgr
 import React, {useState, useContext} from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { currentUserID } from '../database/Adding';
+import { currentUserID2 } from './Receipt';
+import { currentUserIDUpdate } from '../database/Update';
 
 const LoginScreen = props => {
 
@@ -19,6 +21,8 @@ const LoginScreen = props => {
       props.navigation.replace('Main');
       const actual_user_id = logUser.user.uid; //userID
       currentUserID(actual_user_id);
+      currentUserID2(actual_user_id);
+      currentUserIDUpdate(actual_user_id);
     })
     .catch(error => {
       if (error.code === 'auth/user-not-found'){
@@ -33,6 +37,7 @@ const LoginScreen = props => {
     });
   };
 
+
   return (
     <ImageBackground source={require('../images/l6.jpeg')} style={styles.background}>
       <View style={styles.overlay} />
@@ -44,7 +49,7 @@ const LoginScreen = props => {
         <View style={styles.inputView}>
           <TextInput style={styles.inputText} placeholder="Password" value={password} onChangeText={password => setPassword(password)} placeholderTextColor="#003f5c" secureTextEntry={true} />
         </View>
-        <TouchableOpacity style={styles.loginBtn} onPress={ loginUser}>
+        <TouchableOpacity style={styles.loginBtn} onPress={ loginUser }>
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => { props.navigation.navigate('SignUp'); }}>

@@ -1,14 +1,11 @@
 import { StyleSheet, Text, Dimensions } from 'react-native';
 import { Card, Button } from 'react-native-elements';
-import { AddMembership } from '../../database/Adding';
 import {  useNavigation } from '@react-navigation/native';
 import { membershipDetail } from '../../screens/Payment';
+import { membershipDetail2 } from '../../screens/Receipt';
 
 const { width } = Dimensions.get('window');
 const responsiveWidth = width * 0.9; // 90% of the screen width
-
-
-
 
 const MembershipCard = props => {
 
@@ -17,6 +14,7 @@ const MembershipCard = props => {
   const test = () => {
     const membership = { title: props.membershipTitle, price: props.membershipPrice }
     membershipDetail(membership);
+    membershipDetail2(membership);
     //AddMembership(props.membershipTitle);
     navigation.navigate('Payment'); 
   }

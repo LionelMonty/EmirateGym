@@ -1,7 +1,7 @@
-import { setDoc,updateDoc, doc, getDoc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { addMonths, addYears } from 'date-fns';
-import { updateNotification } from "./Update";
+import { updateNotification, updateMembership } from "./Update";
 
 let actualuserID = '';
 
@@ -36,14 +36,34 @@ const calculateMembership = (monthOrYear) => {
 export const AddMembership = async (pack) => {
   try {
       await setDoc(doc(db, "Membership", actualuserID), {
-          membershipPackage: pack,
-          date: calculateMembership(pack),
+          membershipPayment: {
+            date: [calculateMembership(pack)],
+            membershipPackage: [pack],
+          }
       });
-      
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
+    } 
+  catch (e) {
+    console.error("Error adding document: ", e);
+  }
 }
+
+export const checkMembership = async (pack) => {
+  try {
+    // Get a document reference
+    const docRef = doc(db, "Membership", actualuserID);
+    // Get the document
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      // Document exists
+      updateMembership(pack);
+    } else {
+      // Document does not exist
+      AddMembership(pack);
+    }
+  } catch (e) {
+    console.error("Error getting document: ", e);
+  }
+};
 
 export const setNotification = async (title,text) => {
   try {

@@ -1,7 +1,9 @@
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { addMonths, addYears } from 'date-fns';
-import { updateNotification, updateMembership } from "./Update";
+import { updateNotification, updateMembership, updateBooking } from "./Update";
+import moment from "moment";
+import Toast from 'react-native-toast-message';
 
 let actualuserID = '';
 
@@ -96,3 +98,112 @@ export const checkNotification = async (title,text) => {
     console.error("Error getting document: ", e);
   }
 };
+
+export const addBooking = async (selectedTime, nameOfDay, tempTitle) => {
+  try {
+      await setDoc(doc(db, "Booking", actualuserID), {
+          bookingDetail: {
+            date: [nameOfDay],
+            exerciseOption: [tempTitle],
+            hour: [selectedTime],
+          }
+      });
+    } 
+  catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
+
+export const checkBooking = async (book) => {
+  var title = 'Booking Done!';
+  var text = 'Your booking has been successfully.';
+  try {
+    // Get a document reference
+    const docRef = doc(db, "Booking", actualuserID);
+
+    // Get the document
+    const docSnapshot = await getDoc(docRef);
+    if (docSnapshot.exists()) {
+      // Document exists
+      updateBooking(book[0], book[1], book[2]);
+      Toast.show({
+        type: 'success',
+        text1: 'Booking Done!',
+        text2: 'Your booking has been successfully.',
+      });
+      checkNotification(title, text);
+    } 
+    else {
+      // Document does not exist
+      addBooking(book[0], book[1], book[2]);
+      Toast.show({
+        type: 'success',
+        text1: 'Booking Done!',
+        text2: 'Your booking has been successfully.',
+      });
+      checkNotification(title, text);
+    }
+  } 
+  catch (e) {
+    console.error("Error getting document: ", e);
+  }
+};
+
+export const getMembership = async (book) => {
+  
+  try {
+    const docSnap = await getDoc(doc(db, "Membership", actualuserID));
+    // Check if the document exists
+    if (docSnap.exists()) {
+      // Get the membershipPayment field
+      const membershipPayment = docSnap.data().membershipPayment;
+      
+      // Get the text array
+      const date = membershipPayment.date;
+      
+      // Get the last item in the text array
+      const lastItem = date[date.length - 1];
+      
+      // Do something with the last item
+      var d1 = moment(lastItem.toDate(), "yyyy-MM-ddTHH:mm:ss:msZ");
+      var d2 = moment().format("YYYY-MM-DD");
+
+      if(d1.isSameOrAfter(d2)){
+        checkBooking(book);
+      }
+      else{
+
+      }
+
+      console.log(d1.isSameOrAfter(d2)); 
+
+    } else {
+      // Handle the case where the document does not exist
+      console.log("No such document!");
+    }
+  } 
+  catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
+
+
+
+export const checkUserMembership = async (info) => {
+  try {
+    // Get a document reference
+    const docRef = doc(db, "Membership", actualuserID);
+    // Get the document
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      // Document exists
+      getMembership(info);
+    } else {
+      // Document does not exist
+      console.log('part 2');
+    }
+  } catch (e) {
+    console.error("Error getting document: ", e);
+  }
+};
+

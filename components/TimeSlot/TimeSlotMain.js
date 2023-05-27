@@ -3,6 +3,8 @@ import DateString, {getFormattedDate} from './DateString'
 import BoxSlot from './BoxSlot'
 import React, { useState } from 'react';
 import {  useNavigation } from '@react-navigation/native';
+import moment from "moment";
+import { bookingInfo } from '../Reservation/BookNowBtn';
 
 const timeSlots = [
     { id: '1', timeText: '7h00 - 8h00' },
@@ -54,15 +56,33 @@ const TimeSlotMain = props => {
     if (tempTitle === 'Zumba') {
       navigation.navigate('Zumba Reservation');
     }
-    
+
   }
 
-  //display time
+  //selected time
   console.log(selectedTime);
 
   //import name of day
-  const nameOfDay = getFormattedDate(new Date()).split(" ")[0];
+  const x = getFormattedDate(new Date()).split(" ")[1];
+  const y = getFormattedDate(new Date()).split(" ")[2];
+  const z = getFormattedDate(new Date()).split(" ")[3];
+  const nameOfDay =  `${x} ${y} ${z}`;
+
+/*   // Parse the input date strings
+  var d1 = moment("26 June 2023 at 15:45:49 UTC+4", "DD MMMM YYYY [at] HH:mm:ss [UTC]Z");
+  var d2 = moment("26 July 2023", "DD MMMM YYYY");
+
+  // Compare the dates using the functions
+  console.log(d1.isAfter(d2)); // false
+  console.log(d1.isBefore(d2)); // true
+  console.log(d1.isSame(d2)); // false
+  console.log(d1.isSameOrAfter(d2)); // false */
+
   console.log(nameOfDay);
+
+  console.log(tempTitle);
+
+  console.log(bookingInfo(selectedTime, nameOfDay, tempTitle));
 
   const checkDay = () => {
     if (nameOfDay === 'Saturday') {

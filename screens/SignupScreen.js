@@ -50,7 +50,7 @@ const SignupScreen = props => {
       AddUser(user_id,user);
       currentUserID(user_id);
       currentUserID2(user_id);
-      currentUserIDUpdate(actual_user_id);
+      currentUserIDUpdate(user_id);
     })
     .catch(error => {
       if (error.code === 'auth/email-already-in-use'){

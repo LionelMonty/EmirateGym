@@ -7,6 +7,8 @@ import { Merriweather_400Regular, Merriweather_700Bold } from "@expo-google-font
 import BottomNavigation from './navigation/BottomNavigation';
 import { AuthContextProvider } from './context/AuthContext';
 import { Kanit_400Regular, Kanit_100Thin } from "@expo-google-fonts/kanit";
+import Toast from 'react-native-toast-message';
+import React, { useRef } from 'react';
 
 export default function App() {
 
@@ -27,6 +29,7 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <AuthContextProvider>
         <BottomNavigation/>
+        <Toast/>
       </AuthContextProvider>
     </SafeAreaView>
   );

@@ -65,3 +65,26 @@ export const updateMembership = async (pack) => {
   }
 };
 
+export const updateBooking = async (selectedTime, nameOfDay, tempTitle) => {
+  try {
+    // Get a reference to the collection and document
+    const bookingRef = doc(db, "Booking", actualuserIDUpdate);
+
+    // Read the existing messageNotification field
+    const bookingSnap = await getDoc(bookingRef);
+    const bookingDetail = bookingSnap.data().bookingDetail;
+
+    // Add the new values to the text and title arrays
+    bookingDetail.date.push(nameOfDay);
+    bookingDetail.exerciseOption.push(tempTitle);
+    bookingDetail.hour.push(selectedTime);
+
+    // Update the messageNotification field with new text and title
+    await updateDoc(bookingRef, {
+      bookingDetail: bookingDetail,
+    });
+    } catch (e) {
+      console.error("Error updating document: ", e);
+  }
+}
+

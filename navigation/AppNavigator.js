@@ -10,6 +10,8 @@ import SpinningReservation from "../screens/SpinningReservation";
 import WaterAerobicsReservation from "../screens/WaterAerobicsReservation";
 import ZumbaReservation from "../screens/ZumbaReservation";
 import AbdsReservation from "../screens/AbdsReservation";
+import DayPayment from "../screens/DayPayment";
+import Receipt from "../screens/Receipt";
 
 const Stack = createStackNavigator();
 
@@ -27,6 +29,8 @@ const AppNavigator = () => {
             <Stack.Screen name = 'Aerobics Reservation' component= {WaterAerobicsReservation} />
             <Stack.Screen name = 'Zumba Reservation' component= {ZumbaReservation} />
             <Stack.Screen name = 'Thighs abd glutes Reservation' component= {AbdsReservation} />
+            <Stack.Screen name = 'Single Pay' component= {DayPayment} />
+            <Stack.Screen name = 'Invoice' component= {Receipt} />
         </Stack.Navigator>
     );
 }

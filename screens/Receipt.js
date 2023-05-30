@@ -45,7 +45,7 @@ const Receipt = () => {
                     <Text style={styles.subLeftText}>Date</Text>
                     <Text style={styles.leftText}>{moment().format('DD MMM YYYY')}</Text>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Membership')}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
                     <Text style={styles.buttonText}>Done</Text>
                 </TouchableOpacity>
             </View>

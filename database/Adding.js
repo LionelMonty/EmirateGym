@@ -149,7 +149,7 @@ export const checkBooking = async (book) => {
   }
 };
 
-export const getMembership = async (book) => {
+export const getMembership = async (book, navigate) => {
   
   try {
     const docSnap = await getDoc(doc(db, "Membership", actualuserID));
@@ -172,8 +172,9 @@ export const getMembership = async (book) => {
         checkBooking(book);
       }
       else{
-
+        navigate();
       }
+
 
       console.log(d1.isSameOrAfter(d2)); 
 
@@ -189,7 +190,7 @@ export const getMembership = async (book) => {
 
 
 
-export const checkUserMembership = async (info) => {
+export const checkUserMembership = async (info, navigate) => {
   try {
     // Get a document reference
     const docRef = doc(db, "Membership", actualuserID);
@@ -197,10 +198,10 @@ export const checkUserMembership = async (info) => {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       // Document exists
-      getMembership(info);
+      getMembership(info, navigate);
     } else {
       // Document does not exist
-      console.log('part 2');
+      navigate();
     }
   } catch (e) {
     console.error("Error getting document: ", e);

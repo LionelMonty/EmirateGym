@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import {  useNavigation } from '@react-navigation/native';
 import moment from "moment";
 import { bookingInfo } from '../Reservation/BookNowBtn';
+import { bookingInfo2 } from '../../screens/DayPayment';
 
 const timeSlots = [
     { id: '1', timeText: '7h00 - 8h00' },
@@ -83,6 +84,7 @@ const TimeSlotMain = props => {
   console.log(tempTitle);
 
   console.log(bookingInfo(selectedTime, nameOfDay, tempTitle));
+  bookingInfo2(selectedTime, nameOfDay, tempTitle)
 
   const checkDay = () => {
     if (nameOfDay === 'Saturday') {

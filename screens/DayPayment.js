@@ -1,32 +1,22 @@
 import { View, TextInput, TouchableOpacity, Alert, StyleSheet, Image, Text, ScrollView } from 'react-native';
 import React from 'react';
 import { Card } from 'react-native-elements';
-import { checkNotification, checkMembership } from '../database/Adding';
+import { checkNotification, checkBooking } from '../database/Adding';
 import {  useNavigation } from '@react-navigation/native';
-import Toast from 'react-native-toast-message';
 
-let value = {};
+let info = []
 
-export const membershipDetail = (membership) => {
-    value = membership;
-    return value;
-}
-
-const checkAmount = () => {
-  if(value === null){
-    return {title: "Day", price: "Rs125/hour"};
-  }
-  else{
-    return value;
-  }
-}
+export const bookingInfo2 = (selectedTime, nameOfDay, tempTitle) => {
+  info = [selectedTime, nameOfDay, tempTitle];
+  return info;
+};
 
 const sanitizeInput = (input) => {
   // Remove any non-numeric characters
   return input.replace(/[^0-9]/g, '');
 };
 
-const Payment = () => {
+const DayPayment = () => {
 
     const [cardNumber, setCardNumber] = React.useState('');
     const [expirationDate, setExpirationDate] = React.useState('');
@@ -63,19 +53,14 @@ const Payment = () => {
     // All fields are valid
     // Process the card details or navigate to the next screen
     //Alert.alert('Success', 'Card details are valid');
-    checkMembership(value.title);
-    Toast.show({
-      type: 'success',
-      text1: 'Booking Done!',
-      text2: 'Your booking has been successfully.',
-    });
+    checkBooking(info);
     const title = "Transaction Successful!";
     const text = "Congratulations! Your transaction has been successfully completed. Thank you for choosing our services.";
     checkNotification(title, text);
     setCardNumber('');
     setExpirationDate('');
     setCvv('');
-    navigation.navigate('Receipt');
+    navigation.navigate('Invoice');
   };
 
   const handlePayment = () => {
@@ -87,9 +72,9 @@ const Payment = () => {
         <View style={styles.container}>
            <Text style={styles.containerText}>Set up your credit or debit card</Text>
            <Card containerStyle={styles.cardContainer}>
-                <Card.Title>{checkAmount().title}</Card.Title>
+                <Card.Title>Day</Card.Title>
                 <Card.Divider />
-                <Text style={styles.price}>{checkAmount().price}</Text>
+                <Text style={styles.price}>Rs125/hour</Text>
             </Card>
             <View style={styles.imgContainer}>
                 <Image source={require('../images/visa.png')} style={styles.smallImg}/>
@@ -132,13 +117,13 @@ const Payment = () => {
             </View>
         </View>
         <TouchableOpacity style={styles.button} onPress={handlePayment}>
-            <Text style={styles.buttonText}>Membership</Text>
+            <Text style={styles.buttonText}>Payment</Text>
         </TouchableOpacity>
       </ScrollView>
     )
 }
 
-export default Payment;
+export default DayPayment;
 
 const styles = StyleSheet.create({
     container: {

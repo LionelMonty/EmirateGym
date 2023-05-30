@@ -19,6 +19,8 @@ const MembershipCard = props => {
     navigation.navigate('Payment'); 
   }
 
+  
+
   return (
     <Card containerStyle={styles.cardContainer}>
         <Card.Title>{props.membershipTitle}</Card.Title>

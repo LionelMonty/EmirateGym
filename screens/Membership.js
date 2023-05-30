@@ -1,14 +1,16 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import MembershipCard from '../components/Membership/MembershipCard';
 
 const Membership = () => {
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.heading}>Choose a Membership</Text>
-            <MembershipCard membershipTitle = 'Monthly' membershipPrice='Rs1200/month' membershipDiscount=''/>
-            <MembershipCard membershipTitle = 'Yearly' membershipPrice='Rs13000/year' membershipDiscount='10% discount on yearly membership'/>
-        </View>
+        <ScrollView>
+            <View style={styles.container}>
+                <Text style={styles.heading}>Choose a Membership</Text>
+                <MembershipCard membershipTitle = 'Monthly' membershipPrice='Rs1200/month' membershipDiscount=''/>
+                <MembershipCard membershipTitle = 'Yearly' membershipPrice='Rs13000/year' membershipDiscount='10% discount on yearly membership'/>
+            </View>
+        </ScrollView>
     );
 }
 

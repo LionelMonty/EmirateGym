@@ -7,7 +7,6 @@ let c;
 const MainStats = (props) => {
 
     const check = () => {
-        console.log(props.title,"wwwwwwwwwwww");
         if(props.title === "Swimming Pool") {
             c=  8 - props.count; 
             return c;

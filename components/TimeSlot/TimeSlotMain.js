@@ -9,6 +9,10 @@ import { bookingInfo2 } from '../../screens/DayPayment';
 import { getReservedBooking } from '../../database/Read';
 import { valueInfo } from '../../screens/Reservation';
 import { swimmingValueInfo } from '../../screens/SwimmingReservation';
+import { spinningValueInfo } from '../../screens/SpinningReservation';
+import { abdValueInfo } from '../../screens/AbdsReservation';
+import { waterValueInfo } from '../../screens/WaterAerobicsReservation';
+import { zumbaValueInfo } from '../../screens/ZumbaReservation';
 
 const timeSlots = [
     { id: '1', timeText: '7h00 - 8h00' },
@@ -86,6 +90,10 @@ const TimeSlotMain = props => {
   bookingInfo2(selectedTime, nameOfDay, tempTitle);
   valueInfo(nameOfDay, tempTitle, selectedTime);
   swimmingValueInfo(nameOfDay, tempTitle, selectedTime);
+  spinningValueInfo(nameOfDay, tempTitle, selectedTime);
+  abdValueInfo(nameOfDay, tempTitle, selectedTime);
+  waterValueInfo(nameOfDay, tempTitle, selectedTime);
+  zumbaValueInfo(nameOfDay, tempTitle, selectedTime);
 
   const checkDay = () => {
     if (dayName === 'Saturday') {

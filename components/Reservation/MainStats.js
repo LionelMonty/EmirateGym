@@ -2,6 +2,14 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import CircularReservation from './CircularReservation'
 
+let v;
+
+export const counter = (value) => {
+    v= value;
+    return v;
+};
+
+
 const MainStats = () => {
   return (
     <View style={styles.stats_mainContainer}>
@@ -11,11 +19,11 @@ const MainStats = () => {
         <View style={styles.circular_smallContainer}>
             <View style={styles.text_smallContainer}>
                 <Text style={styles.text_title}>Reserved</Text>
-                <Text style={styles.text_numRed}>20</Text>
+                <Text style={styles.text_numRed}>{v}</Text>
             </View>
             <View style={styles.text_smallContainer}>
                 <Text style={styles.text_title}>Available</Text>
-                <Text style={styles.text_numGreen}>8</Text>
+                <Text style={styles.text_numGreen}>{28 - v}</Text>
             </View>
         </View>
     </View>

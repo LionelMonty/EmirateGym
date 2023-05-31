@@ -6,6 +6,8 @@ import {  useNavigation } from '@react-navigation/native';
 import moment from "moment";
 import { bookingInfo } from '../Reservation/BookNowBtn';
 import { bookingInfo2 } from '../../screens/DayPayment';
+import { getReservedBooking } from '../../database/Read';
+import { valueInfo } from '../../screens/Reservation';
 
 const timeSlots = [
     { id: '1', timeText: '7h00 - 8h00' },
@@ -36,9 +38,17 @@ const TimeSlotMain = props => {
   const navigation = useNavigation();
   const [selectedTime, setSelectedTime] = useState(null);
 
+  //import name of day
+  const x = getFormattedDate(new Date()).split(" ")[1];
+  const y = getFormattedDate(new Date()).split(" ")[2];
+  const z = getFormattedDate(new Date()).split(" ")[3];
+  const dayName = getFormattedDate(new Date()).split(" ")[0];
+  const nameOfDay =  `${x} ${y} ${z}`;
 
   const handleTimeSlotPress = (time) => {
     setSelectedTime(time);
+    
+    
     if (tempTitle === 'Gym') {
       navigation.navigate('Reservation');
     }
@@ -58,16 +68,8 @@ const TimeSlotMain = props => {
       navigation.navigate('Zumba Reservation');
     }
 
-  }
+  };
 
-  //selected time
-  console.log(selectedTime);
-
-  //import name of day
-  const x = getFormattedDate(new Date()).split(" ")[1];
-  const y = getFormattedDate(new Date()).split(" ")[2];
-  const z = getFormattedDate(new Date()).split(" ")[3];
-  const nameOfDay =  `${x} ${y} ${z}`;
 
 /*   // Parse the input date strings
   var d1 = moment("26 June 2023 at 15:45:49 UTC+4", "DD MMMM YYYY [at] HH:mm:ss [UTC]Z");
@@ -79,22 +81,20 @@ const TimeSlotMain = props => {
   console.log(d1.isSame(d2)); // false
   console.log(d1.isSameOrAfter(d2)); // false */
 
-  console.log(nameOfDay);
-
-  console.log(tempTitle);
-
   console.log(bookingInfo(selectedTime, nameOfDay, tempTitle));
-  bookingInfo2(selectedTime, nameOfDay, tempTitle)
-
+  bookingInfo2(selectedTime, nameOfDay, tempTitle);
+  //getReservedBooking(nameOfDay, tempTitle, selectedTime);
+  valueInfo(nameOfDay, tempTitle, selectedTime);
+  
   const checkDay = () => {
-    if (nameOfDay === 'Saturday') {
+    if (dayName === 'Saturday') {
       return timeSlots.slice(0, 11);
-    } else if (nameOfDay === 'Sunday') {
+    } else if (dayName === 'Sunday') {
       return timeSlots.slice(0, 5);
     } else {
       return timeSlots;
     }
-  }
+  };
 
     return (
       <ScrollView>

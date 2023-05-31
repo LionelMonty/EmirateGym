@@ -4,15 +4,24 @@ import ViewSchedule from '../components/Reservation/ViewSchedule';
 import LabelSchedule from '../components/Reservation/LabelSchedule';
 import MainStats from '../components/Reservation/MainStats';
 import BookNowBtn from '../components/Reservation/BookNowBtn';
+import { getReservedBooking } from '../database/Read';
 
+let information = {};
+
+export const valueInfo = (nameOfDay, tempTitle, selectedTime) => {
+    return information = { nameOfDay: nameOfDay, tempTitle: tempTitle, selectedTime:selectedTime }
+};
 
 const Reservation = () => {
+
+    getReservedBooking(information.nameOfDay, information.tempTitle, information.selectedTime);
+
     return (
             <View>
                 <Text style={styles.title_container}>Gym Schedule</Text>
                 <ViewSchedule picture={require('../images/gf.jpg')}/>
                 <LabelSchedule/>
-                <MainStats/>
+                <MainStats />
                 <BookNowBtn/>
             </View>
     )

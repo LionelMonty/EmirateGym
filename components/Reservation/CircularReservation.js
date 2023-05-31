@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 
+let v;
+
+export const counter2 = (value) => {
+    v= value;
+    return v;
+};
+
 const CircularReservation = () => {
 
     const [value, setValue] = useState(0);

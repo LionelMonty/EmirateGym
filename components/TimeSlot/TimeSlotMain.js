@@ -8,6 +8,7 @@ import { bookingInfo } from '../Reservation/BookNowBtn';
 import { bookingInfo2 } from '../../screens/DayPayment';
 import { getReservedBooking } from '../../database/Read';
 import { valueInfo } from '../../screens/Reservation';
+import { swimmingValueInfo } from '../../screens/SwimmingReservation';
 
 const timeSlots = [
     { id: '1', timeText: '7h00 - 8h00' },
@@ -83,9 +84,9 @@ const TimeSlotMain = props => {
 
   console.log(bookingInfo(selectedTime, nameOfDay, tempTitle));
   bookingInfo2(selectedTime, nameOfDay, tempTitle);
-  //getReservedBooking(nameOfDay, tempTitle, selectedTime);
   valueInfo(nameOfDay, tempTitle, selectedTime);
-  
+  swimmingValueInfo(nameOfDay, tempTitle, selectedTime);
+
   const checkDay = () => {
     if (dayName === 'Saturday') {
       return timeSlots.slice(0, 11);

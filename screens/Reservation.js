@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from "react";
 import ViewSchedule from '../components/Reservation/ViewSchedule';
 import LabelSchedule from '../components/Reservation/LabelSchedule';
 import MainStats from '../components/Reservation/MainStats';
@@ -14,14 +14,19 @@ export const valueInfo = (nameOfDay, tempTitle, selectedTime) => {
 
 const Reservation = () => {
 
-    getReservedBooking(information.nameOfDay, information.tempTitle, information.selectedTime);
+    const [count, setCount] = useState(0);
+    const title = information.tempTitle;
+
+    useEffect(() => {
+        getReservedBooking(information.nameOfDay, information.tempTitle, information.selectedTime, setCount);
+    }, []);
 
     return (
             <View>
                 <Text style={styles.title_container}>Gym Schedule</Text>
-                <ViewSchedule picture={require('../images/gf.jpg')}/>
+                <ViewSchedule picture={require('../images/gf.jpg')} count = {count}/>
                 <LabelSchedule/>
-                <MainStats />
+                <MainStats count = {count} title = {title}/>
                 <BookNowBtn/>
             </View>
     )

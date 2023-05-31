@@ -11,7 +11,7 @@ const ViewSchedule = (props) => {
 
     const renderItem = ({ item }) => {
         let boxColor = 'rgba(245, 245, 245, 0.4)';
-        if (item.id < 20) {
+        if (item.id < props.count) {
             boxColor = 'rgba(0, 255, 0, 0.3)';
         }
         return (

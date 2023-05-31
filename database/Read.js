@@ -1,8 +1,7 @@
 import { collection, getDocs, query, where } from "firebase/firestore"; 
 import { db } from "../config/firebase";
-import { counter } from "../components/Reservation/MainStats";
 import { counter2 } from "../components/Reservation/CircularReservation";
-export const getReservedBooking = async (nameOfDay, tempTitle, selectedTime) => {
+export const getReservedBooking = async (nameOfDay, tempTitle, selectedTime, callback) => {
     try {
         var count = 0; 
         const q = collection(db, "Booking");
@@ -21,7 +20,7 @@ export const getReservedBooking = async (nameOfDay, tempTitle, selectedTime) => 
         
         });
         console.log(count);
-        counter(count);
+        callback(count);
         counter2(count);
         console.log("===========================================")
     } 

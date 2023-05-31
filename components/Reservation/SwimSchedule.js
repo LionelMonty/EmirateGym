@@ -5,13 +5,13 @@ const { width, height } = Dimensions.get('window');
 const responsiveWidth = width * 0.9; // 90% of the screen width
 const responsiveHeight = height * 0.3; // 25% of the screen height
 
-const SwimSchedule = () => {
+const SwimSchedule = (props) => {
 
     const data = Array.from({ length: 8 }, (_, index) => ({ id: index }));
 
     const renderItem = ({ item }) => {
         let boxColor = 'rgba(245, 245, 245, 0.4)';
-        if (item.id < 3) {
+        if (item.id < props.count) {
             boxColor = 'rgba(0, 255, 0, 0.3)';
         }
         return (

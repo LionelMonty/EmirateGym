@@ -1,33 +1,40 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
-import CircularReservation from './CircularReservation'
+import { View, Text, StyleSheet } from 'react-native';
+import CircularReservation from './CircularReservation';
+import React from "react";
 
-let v;
+let c;
 
-export const counter = (value) => {
-    v= value;
-    return v;
-};
+const MainStats = (props) => {
 
+    const check = () => {
+        console.log(props.title,"wwwwwwwwwwww");
+        if(props.title === "Swimming Pool") {
+            c=  8 - props.count; 
+            return c;
+        }
+        else{
+            c= 28 - props.count;
+            return c;
+        }
+      }
 
-const MainStats = () => {
-  return (
-    <View style={styles.stats_mainContainer}>
-        <View style={styles.circular_mainContainer}>
-            <CircularReservation/>
-        </View>
-        <View style={styles.circular_smallContainer}>
-            <View style={styles.text_smallContainer}>
-                <Text style={styles.text_title}>Reserved</Text>
-                <Text style={styles.text_numRed}>{v}</Text>
+    return (
+        <View style={styles.stats_mainContainer}>
+            <View style={styles.circular_mainContainer}>
+                <CircularReservation count={props.count} title={props.title}/>
             </View>
-            <View style={styles.text_smallContainer}>
-                <Text style={styles.text_title}>Available</Text>
-                <Text style={styles.text_numGreen}>{28 - v}</Text>
+            <View style={styles.circular_smallContainer}>
+                <View style={styles.text_smallContainer}>
+                    <Text style={styles.text_title}>Reserved</Text>
+                    <Text style={styles.text_numRed}>{props.count}</Text>
+                </View>
+                <View style={styles.text_smallContainer}>
+                    <Text style={styles.text_title}>Available</Text>
+                    <Text style={styles.text_numGreen}>{check()}</Text>
+                </View>
             </View>
         </View>
-    </View>
-  )
+    )
 }
 
 export default MainStats;

@@ -1,6 +1,14 @@
-import { collection, getDocs, query, where } from "firebase/firestore"; 
+import { collection, getDocs} from "firebase/firestore"; 
 import { db } from "../config/firebase";
 import { counter2 } from "../components/Reservation/CircularReservation";
+
+let currentUser = '';
+
+export const currentUserIDNotification = (id) => {
+  currentUser = id;
+  return currentUser;
+}
+
 export const getReservedBooking = async (nameOfDay, tempTitle, selectedTime, callback) => {
     try {
         var count = 0; 
@@ -23,6 +31,33 @@ export const getReservedBooking = async (nameOfDay, tempTitle, selectedTime, cal
         callback(count);
         counter2(count);
         console.log("===========================================")
+    } 
+    catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
+
+  export const getNotification = async (callback) => {
+    try {
+        const q = collection(db, "Notification");
+        
+        const querySnapshot = await getDocs(q);
+
+        let notifications = [];
+        querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+          if (doc.id === currentUser) { // only display notification if doc.id matches currentUser
+            for (let i = 0; i < doc.get("messageNotification.text").length; i++) {
+              const notification = {
+                title: doc.get("messageNotification.title")[i],
+                text: doc.get("messageNotification.text")[i],
+              };
+              notifications.push(notification);
+            }
+          }
+        });
+        callback(notifications);
+        
     } 
     catch (e) {
       console.error("Error adding document: ", e);

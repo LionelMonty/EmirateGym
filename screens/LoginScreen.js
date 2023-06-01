@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { currentUserID } from '../database/Adding';
 import { currentUserID2 } from './Receipt';
 import { currentUserIDUpdate } from '../database/Update';
+import { currentUserIDNotification } from '../database/Read';
 
 const LoginScreen = props => {
 
@@ -23,6 +24,7 @@ const LoginScreen = props => {
       currentUserID(actual_user_id);
       currentUserID2(actual_user_id);
       currentUserIDUpdate(actual_user_id);
+      currentUserIDNotification(actual_user_id);
     })
     .catch(error => {
       if (error.code === 'auth/user-not-found'){

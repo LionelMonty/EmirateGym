@@ -2,7 +2,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { StyleSheet} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import SocialMedia from '../screens/SocialMedia';
-import Camera from '../screens/Camera';
+import CameraPage from '../screens/CameraPage';
 import Membership from '../screens/Membership';
 import Profile from '../screens/Profile';
 import { NavigationContainer } from "@react-navigation/native";
@@ -52,7 +52,7 @@ const Home = () => {
             })}>
             <Tab.Screen name="Emirate Gym" component={AppNavigator} options={{ headerShown: false }} />
             <Tab.Screen name = "Feed" component = {SocialMedia} />
-            <Tab.Screen name = "Camera" component = {Camera} />
+            <Tab.Screen name = "Camera" component = {CameraPage} />
             <Tab.Screen name = "MembershipNavigation" component = {MembershipNavigation} options={{ headerShown: false }}/>
             <Tab.Screen name = "Profile" component = {Profile} />
         </Tab.Navigator>

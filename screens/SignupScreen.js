@@ -6,6 +6,7 @@ import { AddUser } from '../database/Adding';
 import { currentUserID } from '../database/Adding';
 import { currentUserID2 } from './Receipt';
 import { currentUserIDUpdate } from '../database/Update';
+import { currentUserIDNotification } from '../database/Read';
 
 const SignupScreen = props => {
 
@@ -51,6 +52,7 @@ const SignupScreen = props => {
       currentUserID(user_id);
       currentUserID2(user_id);
       currentUserIDUpdate(user_id);
+      currentUserIDNotification(actual_user_id);
     })
     .catch(error => {
       if (error.code === 'auth/email-already-in-use'){

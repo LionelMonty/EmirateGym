@@ -2,14 +2,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { StyleSheet} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import SocialMedia from '../screens/SocialMedia';
-import CameraPage from '../screens/CameraPage';
-import Membership from '../screens/Membership';
 import Profile from '../screens/Profile';
 import { NavigationContainer } from "@react-navigation/native";
 import AppNavigator from './AppNavigator';
 import LogNavigator from './LogNavigator';
 import {  useContext } from 'react';
 import MembershipNavigation from './MembershipNavigation';
+import CamNavigator from './CamNavigator';
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { AuthContext } from '../context/AuthContext';
@@ -28,7 +27,7 @@ const Home = () => {
                         iconName = 'home';
                     } else if (route.name === 'Feed') {
                         iconName = 'md-newspaper';
-                    } else if (route.name === 'Camera') {
+                    } else if (route.name === 'Photo') {
                         iconName = 'add-circle-outline';
                     } else if (route.name === 'MembershipNavigation') {
                         iconName = 'md-people';
@@ -52,7 +51,7 @@ const Home = () => {
             })}>
             <Tab.Screen name="Emirate Gym" component={AppNavigator} options={{ headerShown: false }} />
             <Tab.Screen name = "Feed" component = {SocialMedia} />
-            <Tab.Screen name = "Camera" component = {CameraPage} />
+            <Tab.Screen name = "Photo" component = {CamNavigator} options={{ headerShown: false }}/>
             <Tab.Screen name = "MembershipNavigation" component = {MembershipNavigation} options={{ headerShown: false }}/>
             <Tab.Screen name = "Profile" component = {Profile} />
         </Tab.Navigator>

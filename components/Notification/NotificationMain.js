@@ -20,7 +20,7 @@ const NotificationMain = () => {
           return (
             <NotificationCard
               key={notification.id}
-              NotificationImage={require("../../images/gymRoom.jpg")}
+              NotificationImage={require("../../images/logoEG.jpg")}
               messageTitle={notification.title}
               notificationText={notification.text}
             />

@@ -31,7 +31,7 @@ const Receipt = () => {
 
                 <View style={styles.subContainer}>
                     <Text style={styles.subLeftText}>Total Amount</Text>
-                    <Text style={styles.leftText}>{value.title === 'Monthly' ? 'MUR 1200.00' : 'MUR 13000.00'}</Text>
+                    <Text style={styles.leftText}>{value.title === 'Monthly' ? 'MUR 1200.00' : value.title === 'Yearly' ? 'MUR 13000.00' : 'MUR 125.00'}{value.title = ""}</Text>
 
                     <Text style={styles.subLeftText}>Beneficiary</Text>
                     <Text style={styles.leftText}>Emirate Gym</Text>
@@ -51,6 +51,8 @@ const Receipt = () => {
             </View>
         </ScrollView>
     )
+
+    
 }
 
 export default Receipt;

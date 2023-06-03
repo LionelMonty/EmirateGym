@@ -1,4 +1,4 @@
-import { collection, getDocs} from "firebase/firestore"; 
+import { collection, getDocs, getDoc, doc, updateDoc,arrayRemove,arrayUnion  } from "firebase/firestore"; 
 import { db } from "../config/firebase";
 import { counter2 } from "../components/Reservation/CircularReservation";
 
@@ -56,6 +56,7 @@ export const getReservedBooking = async (nameOfDay, tempTitle, selectedTime, cal
             }
           }
         });
+        notifications.reverse();
         callback(notifications);
         
     } 
@@ -63,3 +64,57 @@ export const getReservedBooking = async (nameOfDay, tempTitle, selectedTime, cal
       console.error("Error adding document: ", e);
     }
   };
+
+  export const checkBookingExist = async (info) => {
+    try {
+      const docRef = doc(db, "Booking", currentUser);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        checkTodayBooking(info[0], info[1], info[2], docSnap, docRef);
+      } else {
+        console.log('You have not booked today at this slot')
+      }
+    } catch (e) {
+      alert("Error getting document: ", e);
+    }
+  };
+
+  export const checkTodayBooking = async (selectedTime, nameOfDay, tempTitle, docSnap, docRef) => {
+    if(docSnap){
+      const bookingDetail = docSnap.data().bookingDetail;
+
+      const tempdate = bookingDetail.date;
+      const temptempTitle = bookingDetail.exerciseOption;
+      const tempselectedTime = bookingDetail.hour;
+      
+      for (let i = 0; i < tempdate.length; i++) {
+        if (tempdate[i] == nameOfDay && temptempTitle[i] == tempTitle && tempselectedTime[i] == selectedTime) {
+
+          let index1 = tempdate.indexOf(nameOfDay);
+          let index2 = temptempTitle.indexOf(tempTitle);
+          let index3 = tempselectedTime.indexOf(selectedTime);
+
+          tempdate.splice(index1, 1);
+          temptempTitle.splice(index2, 1);
+          tempselectedTime.splice(index3, 1);
+          await updateDoc(docRef, { bookingDetail: { date: arrayRemove(nameOfDay), exerciseOption: arrayRemove(tempTitle), hour: arrayRemove(selectedTime) } });
+          
+          for (let i = 0; i < tempdate.length; i++) {
+            await updateDoc(docRef, { bookingDetail: { date: arrayUnion(tempdate[i]), exerciseOption: arrayUnion(temptempTitle[i]), hour: arrayUnion(tempselectedTime[i]) } });
+          };
+        
+          alert("Your booking has been canceled. Unfortunately, we are unable to provide a refund.");
+        } 
+        else {
+          // do something else if they don't match
+          console.log('You have not booked today at this slot')
+        }
+      }
+    }
+    else{
+      console.log("Document does not exist or query failed");
+    }
+  };
+
+

@@ -5,6 +5,7 @@ import LabelSchedule from '../components/Reservation/LabelSchedule';
 import MainStats from '../components/Reservation/MainStats';
 import BookNowBtn from '../components/Reservation/BookNowBtn';
 import { getReservedBooking } from '../database/Read';
+import { checkTodayBooking } from '../database/Read';
 
 let information = {};
 
@@ -19,6 +20,7 @@ const AbdsReservation = () => {
 
     useEffect(() => {
         getReservedBooking(information.nameOfDay, information.tempTitle, information.selectedTime, setCount);
+        checkTodayBooking(information.nameOfDay, information.tempTitle, information.selectedTime);
     }, []);
 
     return (

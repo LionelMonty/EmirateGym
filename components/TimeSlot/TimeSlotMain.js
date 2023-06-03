@@ -6,7 +6,6 @@ import {  useNavigation } from '@react-navigation/native';
 import moment from "moment";
 import { bookingInfo } from '../Reservation/BookNowBtn';
 import { bookingInfo2 } from '../../screens/DayPayment';
-import { getReservedBooking } from '../../database/Read';
 import { valueInfo } from '../../screens/Reservation';
 import { swimmingValueInfo } from '../../screens/SwimmingReservation';
 import { spinningValueInfo } from '../../screens/SpinningReservation';

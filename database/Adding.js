@@ -67,6 +67,7 @@ export const checkMembership = async (pack) => {
   }
 };
 
+
 export const setNotification = async (title,text) => {
   try {
     await setDoc(doc(db, "Notification", actualuserID), {
@@ -81,7 +82,7 @@ export const setNotification = async (title,text) => {
   }
 };
 
-export const checkNotification = async (title,text) => {
+export const checkNotification = async (title, text) => {
   try {
     // Get a document reference
     const docRef = doc(db, "Notification", actualuserID);

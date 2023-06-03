@@ -1,14 +1,18 @@
-import { Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { checkUserMembership } from '../../database/Adding'
+import { Text, StyleSheet, TouchableOpacity, View, Dimensions } from 'react-native'
+import React from 'react';
+import { checkUserMembership } from '../../database/Adding';
 import {  useNavigation } from '@react-navigation/native';
+import { checkBookingExist } from '../../database/Read';
 
-let info = []
+let info = [];
 
 export const bookingInfo = (selectedTime, nameOfDay, tempTitle) => {
   info = [selectedTime, nameOfDay, tempTitle];
   return info;
 };
+
+const { width } = Dimensions.get('window');
+const responsiveWidth = width * 0.42; // 90% of the screen width
 
 const BookNowBtn = () => {
   const navigation = useNavigation();
@@ -18,25 +22,43 @@ const BookNowBtn = () => {
   };
 
   return (
-    <TouchableOpacity style={styles.button} onPress={() => {checkUserMembership(info, paymentPage)}}>
-        <Text style={styles.buttonText}>Book Now</Text>
-    </TouchableOpacity>
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.buttonBook} onPress={() => {checkUserMembership(info, paymentPage)}}>
+            <Text style={styles.buttonText}>Book Now</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonCancel} onPress={() => {checkBookingExist(info)}}>
+            <Text style={styles.buttonText}>Cancel Booking</Text>
+        </TouchableOpacity>
+      </View>
   )
 }
 
 export default BookNowBtn;
 
 const styles = StyleSheet.create({
-    button: {
-        backgroundColor: 'red',
-        margin:20,
-        padding: 10,
-        borderRadius: 5,
-        marginTop: 20,
-    },
-      buttonText: {
-        color: '#fff',
-        fontSize: 16,
-        textAlign: 'center',
-    },
+  container:{
+    flexDirection:'row',
+    alignSelf:'center',
+  },
+  buttonBook: {
+      backgroundColor: 'green',
+      margin:5,
+      padding: 10,
+      borderRadius: 5,
+      marginTop: 20,
+      width:responsiveWidth,
+  },
+  buttonCancel: {
+    backgroundColor: 'red',
+    margin:5,
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+    width:responsiveWidth,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
+  },
 });

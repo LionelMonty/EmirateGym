@@ -66,8 +66,8 @@ const Payment = () => {
     checkMembership(value.title);
     Toast.show({
       type: 'success',
-      text1: 'Booking Done!',
-      text2: 'Your booking has been successfully.',
+      text1: 'Membership Done!',
+      text2: 'Your transaction has been successfully completed.',
     });
     const title = "Transaction Successful!";
     const text = "Congratulations! Your transaction has been successfully completed. Thank you for choosing our services.";

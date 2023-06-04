@@ -69,7 +69,7 @@ const SignupScreen = props => {
   const signUpUser = () => {
     if (validateInput()) {
       createUser();
-      props.navigation.navigate('Login');
+      props.navigation.navigate('Auth');
     }
   };
 

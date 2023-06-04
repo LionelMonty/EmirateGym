@@ -9,6 +9,7 @@ import LogNavigator from './LogNavigator';
 import {  useContext } from 'react';
 import MembershipNavigation from './MembershipNavigation';
 import CamNavigator from './CamNavigator';
+import AdminBottomNavigator from './AdminBottomNavigator';
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { AuthContext } from '../context/AuthContext';
@@ -65,9 +66,11 @@ const BottomNavigation = () => {
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 {userAccount ? (
                     <Stack.Screen name = 'Main' component= {Home} />
+                    
                 ) : (
                     <Stack.Screen name = 'Auth' component= {LogNavigator} />
                 )}
+                <Stack.Screen name = 'Admin' component= {AdminBottomNavigator} />
           </Stack.Navigator>           
         </NavigationContainer>
     );

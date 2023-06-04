@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "../screens/LoginScreen";
 import AdminSetting from "../screens/AdminSetting";
 import AdminHome from "../screens/AdminHome";
+import AdminNotification from "../screens/AdminNotification";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -18,11 +19,28 @@ const AdminHomeMethod = () => {
             options={{
               headerShown: false,
               tabBarIcon: ({ color, size }) => (
-                  <Ionicons name="md-home" size={size} color={"#FF0000"} />
+                  <Ionicons name="md-home" size={size} color={color} />
               ),
               tabBarLabelStyle: {
                 color: "#FF0000",
               },
+              tabBarActiveTintColor: '#FF0000',
+              tabBarInactiveTintColor: 'gray',
+            }}
+        />
+        <Tab.Screen
+            name="Admin Notification"
+            component={AdminNotification}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ color, size }) => (
+                  <Ionicons name="notifications-outline" size={size} color={color} />
+                  ),
+              tabBarLabelStyle: {
+                color: "#FF0000",
+              },
+              tabBarActiveTintColor: '#FF0000',
+              tabBarInactiveTintColor: 'gray',
             }}
         />
     </Tab.Navigator>

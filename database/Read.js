@@ -1,4 +1,4 @@
-import { collection, getDocs, getDoc, doc, updateDoc,arrayRemove,arrayUnion  } from "firebase/firestore"; 
+import { collection, getDocs, getDoc, doc, updateDoc,arrayRemove,arrayUnion, setDoc  } from "firebase/firestore"; 
 import { db } from "../config/firebase";
 import { counter2 } from "../components/Reservation/CircularReservation";
 
@@ -117,4 +117,72 @@ export const getReservedBooking = async (nameOfDay, tempTitle, selectedTime, cal
     }
   };
 
+  export const checkUserExist = async (title, text) => {
+    try {
+      const q = collection(db, "User");
+        
+      const querySnapshot = await getDocs(q);
 
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id);
+        adminCheckNotification(title, text, doc.id)
+      })
+
+    } catch (e) {
+      alert("Error getting document: ", e);
+    }
+  };
+
+  export const adminAddNotification = async (title,text,docId) => {
+    try {
+      await setDoc(doc(db, "Notification", docId), {
+        messageNotification: {
+          title: [title],
+          text: [text],
+        }
+      });
+      
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
+
+  export const adminUpdateNotification = async (title,text,docId) => {
+    try {
+      // Get a reference to the collection and document
+      const notificationRef = doc(db, "Notification", docId);
+  
+      // Read the existing messageNotification field
+      const notificationSnap = await getDoc(notificationRef);
+      const messageNotification = notificationSnap.data().messageNotification;
+  
+      // Add the new values to the text and title arrays
+      messageNotification.text.push(text);
+      messageNotification.title.push(title);
+  
+      // Update the messageNotification field with new text and title
+      await updateDoc(notificationRef, {
+        messageNotification: messageNotification,
+      });
+      } catch (e) {
+        console.error("Error updating document: ", e);
+    }
+};
+
+export const adminCheckNotification = async (title, text, docId) => {
+  try {
+    // Get a document reference
+    const docRef = doc(db, "Notification", docId);
+    // Get the document
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      // Document exists
+      adminUpdateNotification(title,text, docId);
+    } else {
+      // Document does not exist
+      adminAddNotification(title,text, docId);
+    }
+  } catch (e) {
+    console.error("Error getting document: ", e);
+  }
+};

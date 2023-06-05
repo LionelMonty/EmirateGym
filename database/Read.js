@@ -186,3 +186,43 @@ export const adminCheckNotification = async (title, text, docId) => {
     console.error("Error getting document: ", e);
   }
 };
+
+
+export const countUser = async () => {
+  let count = 0;
+  let arrayDetail = [];
+  try {
+    const q = collection(db, "User");
+      
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      count +=1;
+      const { username } = doc.data();
+      arrayDetail.push({ id: doc.id, name: username });
+    })
+    console.log(arrayDetail);
+    return { count, arrayDetail };
+    
+
+  } catch (e) {
+    alert("Error getting document: ", e);
+  }
+};
+
+export const countMembership = async () => {
+  let count = 0;
+  try {
+    const q = collection(db, "Membership");
+      
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      count +=1;
+    })
+    return count;
+
+  } catch (e) {
+    alert("Error getting document: ", e);
+  }
+};

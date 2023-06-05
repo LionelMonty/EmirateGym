@@ -1,21 +1,31 @@
-import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
 import AdminHeader from "../components/Header/AdminHeader";
 import { countUser } from '../database/Read';
 import { countMembership } from '../database/Read';
 import React, { useEffect, useState } from 'react';
+import { deleteUserDocument } from '../database/Delete';
+import Toast from 'react-native-toast-message';
+
+const { height } = Dimensions.get('window');
+const responsiveHeight = height * 0.1;
 
 const AdminHome = () => {
   const [countValue, setCountValue] = useState(0);
   const [countMembershipValue, setCountMembership] = useState(0);
   const [arrayDetail, setArrayDetail] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
     const getCount = async () => {
       try {
-        const {count, arrayDetail } = await countUser();
-        setCountValue(count);
-        setArrayDetail(arrayDetail);
+        if(refresh){
+          const {count, arrayDetail } = await countUser();
+          setCountValue(count);
+          setArrayDetail(arrayDetail);
+          setRefresh(false);
+        }
+        
       } catch (error) {
         console.error(error);
       }
@@ -32,7 +42,9 @@ const AdminHome = () => {
 
     getCount();
     getCountMembership();
-  }, []);
+
+    
+  }, [refresh]);
 
   const handleUserSelect = (userId) => {
     setSelectedUserId(userId);
@@ -40,12 +52,24 @@ const AdminHome = () => {
 
   const handleDeleteUser = () => {
     console.log(selectedUserId);
+    if(selectedUserId !== null) {
+      deleteUserDocument(selectedUserId);
+      
+      Toast.show({
+        type: 'success',
+        text1: 'Delete Done!',
+        text2: 'Your deletion has been successfully completed.',
+      });
+      setRefresh(true);
+    };
+    setSelectedUserId(null);
   };
 
   return (
     <View style={styles.mainContainer}>
         <AdminHeader />
         <ScrollView>
+          <Text style={styles.dashBoardText}>User DashBoard</Text>
           <View style={styles.boxContainer}>
             <View style={styles.boxRed}>
               <Text style={styles.text}>User</Text>
@@ -83,26 +107,36 @@ const styles = StyleSheet.create({
   mainContainer:{
     flex: 1,
   },
+  dashBoardText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    alignItems: 'center',
+    color:"#ff0000",
+    marginTop: 10,
+  },
   boxContainer: {
     flexDirection:'row',
-    margin: 20,
+    marginTop: 10,
     alignSelf:'center',
+    marginBottom: 15,
   },
   boxRed: {
-    height: 75,
-    width: '35%',
+    height:responsiveHeight,
+    width: '37%',
     backgroundColor:'#ff0000',
-    margin: 20,
+    margin: 10,
     borderRadius: 12,
     padding:5,
+    justifyContent:'center',
   },
   boxGreen: {
-    height: 75,
-    width: '35%',
+    width: '37%',
     backgroundColor:'green',
-    margin: 20,
+    margin: 10,
     borderRadius: 12,
-    padding:5
+    padding:5,
+    justifyContent:'center',
   },
   text: {
     textAlign:'center',

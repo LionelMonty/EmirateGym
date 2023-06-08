@@ -1,4 +1,4 @@
-import { setDoc, doc, getDoc } from "firebase/firestore";
+import { setDoc, doc, getDoc, collection, addDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { addMonths, addYears } from 'date-fns';
 import { updateNotification, updateMembership, updateBooking } from "./Update";
@@ -209,3 +209,15 @@ export const checkUserMembership = async (info, navigate) => {
   }
 };
 
+
+export const addPhotoToFirestore = async (userID,downloadURL) => {
+  try {
+    const docRef = await addDoc(collection(db, "Feed"), {
+      userID: userID,
+      photoName: downloadURL,
+    });
+  } 
+  catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};

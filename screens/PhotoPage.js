@@ -1,27 +1,23 @@
-import {
-  View,
-  ImageBackground,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
-import React, { useState } from "react";
+import { View, ImageBackground, StyleSheet, TouchableOpacity } from "react-native";
+import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { firebaseStorage } from "../config/firebase";
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { addPhotoToFirestore } from "../database/Adding";
+import {  useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 
-let actualuserID = "";
+let userID = "";
 
 export const currentUserIDPhoto = (id) => {
-  actualuserID = id;
-  return actualuserID;
+  userID = id;
+  return userID;
 };
 
 const PhotoPage = ({ route }) => {
+
+  const navigation = useNavigation();
+
   const { photo } = route.params;
   const childPath = "images/";
 
@@ -77,6 +73,13 @@ const PhotoPage = ({ route }) => {
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log("File available at", downloadURL);
+          Toast.show({
+            type: 'success',
+            text1: 'Photo Uploaded!',
+            text2: 'Your photo has been successfully uploaded.',
+          });
+          addPhotoToFirestore(userID,downloadURL);
+          navigation.navigate("Camera");
         });
       }
     );

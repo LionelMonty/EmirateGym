@@ -25,10 +25,18 @@ const PhotoPage = ({ route }) => {
   const { photo } = route.params;
   const childPath = "images/";
 
-  const uploadImage = () => {
+  const uploadImage = async () => {
     // Upload file and metadata to the object 'images/file.name'
-    const storageRef = ref(firebaseStorage, childPath + photo);
-    const uploadTask = uploadBytesResumable(storageRef);
+    const filename = photo.split('/').pop();
+    const response = await fetch(photo);
+    const blob = await response.blob();
+    const storageRef = ref(firebaseStorage, childPath + filename);
+    
+    const metadata = {
+      contentType: 'image/jpeg',
+    };
+
+    const uploadTask = uploadBytesResumable(storageRef, blob , metadata);
 
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(

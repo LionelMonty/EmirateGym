@@ -28,8 +28,8 @@ const CameraPage = () => {
 
   const takePhoto = async () => {
     if (camera) {
-      const options = { quality: 0.5, base64: true };
-      const photo = await camera.takePictureAsync(null);
+      const options = { quality: 1, base64: true, exif: false };
+      const photo = await camera.takePictureAsync(options);
       setImage(photo.uri);
 
       navigation.navigate('Image', { photo: photo.uri });

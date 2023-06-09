@@ -2,7 +2,7 @@ import React from "react";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Ionicons} from '@expo/vector-icons';
 import { createStackNavigator } from "@react-navigation/stack";
-import LoginScreen from "../screens/LoginScreen";
+import LogNavigator from './LogNavigator';
 import AdminSetting from "../screens/AdminSetting";
 import AdminHome from "../screens/AdminHome";
 import AdminNotification from "../screens/AdminNotification";
@@ -52,7 +52,7 @@ const AdminBottomNavigator = () => {
         <Stack.Navigator>
             <Stack.Screen name = 'Admin Home' component= {AdminHomeMethod} options={{ headerShown: false }}/>
             <Stack.Screen name = 'Admin Setting' component= {AdminSetting} />
-            <Stack.Screen name = 'Admin Login' component= {LoginScreen} options={{ headerShown: false }}/>
+            <Stack.Screen name = 'Admin Login' component= {LogNavigator} options={{ headerShown: false }}/>
         </Stack.Navigator>           
 );
 };

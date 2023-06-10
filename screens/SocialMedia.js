@@ -1,39 +1,74 @@
 import {Text, View, Image, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { Rating } from "react-native-ratings";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { readFeed } from '../database/Read';
+import React, { useEffect, useState } from 'react';
+import FeedHeader from '../components/Header/FeedHeader';
 
 const { height } = Dimensions.get('window');
 const responsiveHeight = height * 0.55;
 
 const SocialMedia = () => {
+
+    const [arrayDetail, setArrayDetail] = useState([]);
+
+    const [refresh, setRefresh] = useState(true);
+  
+    useEffect(() => {
+      const getPhoto = async () => {
+        try {
+          if(refresh){
+            const { arrayDetail: fetchedArrayDetail } = await readFeed();
+            setArrayDetail(fetchedArrayDetail);
+            setRefresh(false);
+          }
+          
+        } catch (error) {
+          console.error(error);
+        }
+      };
+  
+      getPhoto();
+
+    }, [refresh]);
+
+    const handleRefresh = () => {
+        setRefresh(true);
+    };
+
     return (
-        <ScrollView>
-            <View style={styles.mainContainer}>
-                <View style={styles.container}>
-                    <View style={styles.firstMiniContainer}>
-                        <View style={styles.firstMiniContainer1}>
-                            <Image style={styles.profilePicture} source={require('../images/abd.jpg')}/>
-                            <Text style={styles.username}>Lionel Monty</Text>
-                        </View>
-                        <View style={styles.firstMiniContainer2}>
-                            <Icon name="ellipsis-v" size={25} color="#000" />
-                        </View>
-                    </View>
-                    <View style={styles.secondMiniContainer}>
-                        <Image style={styles.picture} source={require('../images/abd.jpg')}/>
-                    </View>
-                    <View style={styles.thirdMiniContainer}>
-                        <View style={styles.thirdMiniContainer1}>
-                            <Rating style={styles.rating} imageSize={25} startingValue={1} showRating={false} isDisabled fractions={1} jumpValue={0.5} tintColor={"#CCCCCC"}/>
-                            <Icon name="send" size={25} color="#CCCCCC" />
-                        </View>
-                        <View style={styles.thirdMiniContainer2}>
-                            <Text style={styles.text}>Your photo will be visible to all users. Users can rate your photo to show their support and encouragement for your activities.</Text>
-                        </View>
-                    </View>
-                </View> 
-            </View>
-        </ScrollView>
+        <>
+            <FeedHeader loading = {handleRefresh}/>
+            <ScrollView>
+                <View style={styles.mainContainer}>
+                    {arrayDetail.map((photo, index) => (
+                        <View style={styles.container} key={index}>
+                            <View style={styles.firstMiniContainer}>
+                                <View style={styles.firstMiniContainer1}>
+                                    <Image style={styles.profilePicture} source={require('../images/visa.png')}/>
+                                    <Text style={styles.username}>Lionel Monty</Text>
+                                </View>
+                                <View style={styles.firstMiniContainer2}>
+                                    <Icon name="ellipsis-v" size={25} color="#000" />
+                                </View>
+                            </View>
+                            <View style={styles.secondMiniContainer}>
+                                <Image style={styles.picture} source={{ uri: photo.photoName }}/>
+                            </View>
+                            <View style={styles.thirdMiniContainer}>
+                                <View style={styles.thirdMiniContainer1}>
+                                    <Rating style={styles.rating} imageSize={25} startingValue={1} showRating={false} isDisabled fractions={1} jumpValue={0.5} tintColor={"#CCCCCC"}/>
+                                    <Icon name="send" size={25} color="#CCCCCC" />
+                                </View>
+                                <View style={styles.thirdMiniContainer2}>
+                                    <Text style={styles.text}>Your photo will be visible to all users. Users can rate your photo to show their support and encouragement for your activities.</Text>
+                                </View>
+                            </View>
+                        </View> 
+                    ))}
+                </View>
+            </ScrollView>
+        </>
         
     );
 }

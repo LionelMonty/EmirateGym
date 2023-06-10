@@ -226,3 +226,25 @@ export const countMembership = async () => {
     alert("Error getting document: ", e);
   }
 };
+
+export const readFeed = async () => {
+  
+  let arrayDetail = [];
+  try {
+    const q = collection(db, "Feed");
+      
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      const { photoName, userID } = doc.data();
+      arrayDetail.push({ userID: userID, photoName: photoName });
+    })
+    return { arrayDetail };
+    
+
+  } catch (e) {
+    alert("Error getting document: ", e);
+  }
+
+
+};

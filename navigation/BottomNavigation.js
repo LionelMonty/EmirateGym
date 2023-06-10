@@ -51,7 +51,7 @@ const Home = () => {
                   },
             })}>
             <Tab.Screen name="Emirate Gym" component={AppNavigator} options={{ headerShown: false }} />
-            <Tab.Screen name = "Feed" component = {SocialMedia} />
+            <Tab.Screen name = "Feed" component = {SocialMedia} options={{ headerShown: false }}/>
             <Tab.Screen name = "Photo" component = {CamNavigator} options={{ headerShown: false }}/>
             <Tab.Screen name = "MembershipNavigation" component = {MembershipNavigation} options={{ headerShown: false }}/>
             <Tab.Screen name = "Profile" component = {Profile} />

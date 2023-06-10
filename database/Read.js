@@ -236,8 +236,8 @@ export const readFeed = async () => {
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
-      const { photoName, userID } = doc.data();
-      arrayDetail.push({ userID: userID, photoName: photoName });
+      const { photoName, userID, name, creation } = doc.data();
+      arrayDetail.push({ userID: userID, photoName: photoName, name: name, creation: creation });
     })
     return { arrayDetail };
     

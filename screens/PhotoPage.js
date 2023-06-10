@@ -3,7 +3,7 @@ import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { firebaseStorage } from "../config/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { addPhotoToFirestore } from "../database/Adding";
+import { addPhotoToFirestore, addPhotoInformationToFirestore } from "../database/Adding";
 import {  useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 
@@ -78,7 +78,10 @@ const PhotoPage = ({ route }) => {
             text1: 'Photo Uploaded!',
             text2: 'Your photo has been successfully uploaded.',
           });
-          addPhotoToFirestore(userID,downloadURL);
+
+
+
+          addPhotoInformationToFirestore(userID,downloadURL);
           navigation.navigate("Camera");
         });
       }

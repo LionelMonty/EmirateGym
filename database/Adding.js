@@ -210,14 +210,36 @@ export const checkUserMembership = async (info, navigate) => {
 };
 
 
-export const addPhotoToFirestore = async (userID,downloadURL) => {
+export const addPhotoToFirestore = async (userID,downloadURL,name) => {
   try {
-    const docRef = await addDoc(collection(db, "Feed"), {
+    await addDoc(collection(db, "Feed"), {
       userID: userID,
       photoName: downloadURL,
+      name: name,
+      creation: moment().format('YYYY-MM-DD HH:mm:ss'),
     });
   } 
   catch (e) {
     console.error("Error adding document: ", e);
   }
 };
+
+
+export const addPhotoInformationToFirestore = async (documentRef,downloadURL) => {
+  try {
+      const docRef = doc(db, "User", documentRef);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        
+        const name = docSnap.data().username;
+        console.log(name)
+        addPhotoToFirestore(documentRef,downloadURL,name);
+      } 
+      else {
+        throw new Error("Document does not exist.");
+      }
+  } catch (e) {
+    console.error("Error getting document: ", e);
+    return null;
+  }
+}

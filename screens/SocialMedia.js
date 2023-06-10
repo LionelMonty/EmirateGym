@@ -41,12 +41,14 @@ const SocialMedia = () => {
             <FeedHeader loading = {handleRefresh}/>
             <ScrollView>
                 <View style={styles.mainContainer}>
-                    {arrayDetail.map((photo, index) => (
+                    {arrayDetail
+                    .sort((a, b) => new Date(b.creation) - new Date(a.creation))
+                    .map((photo, index) => (
                         <View style={styles.container} key={index}>
                             <View style={styles.firstMiniContainer}>
                                 <View style={styles.firstMiniContainer1}>
                                     <Image style={styles.profilePicture} source={require('../images/visa.png')}/>
-                                    <Text style={styles.username}>Lionel Monty</Text>
+                                    <Text style={styles.username}>{photo.name}</Text>
                                 </View>
                                 <View style={styles.firstMiniContainer2}>
                                     <Icon name="ellipsis-v" size={25} color="#000" />

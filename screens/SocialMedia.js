@@ -38,7 +38,7 @@ const SocialMedia = () => {
 
     return (
         <>
-            <FeedHeader loading = {handleRefresh}/>
+            <FeedHeader loading = {handleRefresh} title = "Feed"/>
             <ScrollView>
                 <View style={styles.mainContainer}>
                     {arrayDetail

@@ -1,4 +1,4 @@
-import { collection, getDocs, getDoc, doc, updateDoc,arrayRemove,arrayUnion, setDoc  } from "firebase/firestore"; 
+import { collection, getDocs, getDoc, doc, updateDoc,arrayRemove,arrayUnion, setDoc, query, where  } from "firebase/firestore"; 
 import { db } from "../config/firebase";
 import { counter2 } from "../components/Reservation/CircularReservation";
 
@@ -228,11 +228,9 @@ export const countMembership = async () => {
 };
 
 export const readFeed = async () => {
-  
   let arrayDetail = [];
   try {
     const q = collection(db, "Feed");
-      
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
@@ -240,11 +238,25 @@ export const readFeed = async () => {
       arrayDetail.push({ userID: userID, photoName: photoName, name: name, creation: creation });
     })
     return { arrayDetail };
-    
-
-  } catch (e) {
+  } 
+  catch (e) {
     alert("Error getting document: ", e);
   }
+};
 
+export const readUserProfileGallery = async () => {
+  let arrayDetail = [];
+  try {
+    const q = query(collection(db, "Feed"), where("userID", "==", currentUser));
+    const querySnapshot = await getDocs(q);
 
+    querySnapshot.forEach((doc) => {
+      const { photoName, userID, name, creation } = doc.data();
+      arrayDetail.push({ userID: userID, photoName: photoName, name: name, creation: creation });
+    })
+    return { arrayDetail };
+  } 
+  catch (e) {
+    alert("Error getting document: ", e);
+  }
 };

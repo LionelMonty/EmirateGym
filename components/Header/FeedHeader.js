@@ -10,7 +10,7 @@ const FeedHeader = (props) => {
             <Header
             backgroundColor="#FF0000"
             placement="center"
-            centerComponent={{ text: 'Feed', style: { color: '#fff', fontSize: 22 ,fontFamily: 'Merriweather_700Bold'} }}
+            centerComponent={{ text: props.title, style: { color: '#fff', fontSize: 22 ,fontFamily: 'Merriweather_700Bold'} }}
             rightComponent={<Icon name="refresh" color="#fff" size={25} onPress = {props.loading} />}
             />
         </View>

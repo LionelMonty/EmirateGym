@@ -1,8 +1,7 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 
-const NotificationCard = (props) => {
-    const { NotificationImage, messageTitle, notificationText } = props;
+const NotificationCard = ({ NotificationImage, messageTitle, notificationText }) => {
     return (
             
             <View style={styles.notification}>

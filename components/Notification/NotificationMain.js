@@ -16,10 +16,10 @@ const NotificationMain = () => {
   return (
       <ScrollView>
         <View style={styles.container}>
-          {notifications.map((notification) => {
+          {notifications.map((notification, index) => {
           return (
             <NotificationCard
-              key={notification.id}
+              key={index}
               NotificationImage={require("../../images/logoEG.jpg")}
               messageTitle={notification.title}
               notificationText={notification.text}
@@ -31,7 +31,7 @@ const NotificationMain = () => {
   )
 }
 
-export default NotificationMain
+export default NotificationMain;
 
 const styles = StyleSheet.create({
   container: {

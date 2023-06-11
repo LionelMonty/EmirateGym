@@ -47,7 +47,7 @@ const SocialMedia = () => {
                         <View style={styles.container} key={index}>
                             <View style={styles.firstMiniContainer}>
                                 <View style={styles.firstMiniContainer1}>
-                                    <Image style={styles.profilePicture} source={require('../images/visa.png')}/>
+                                    <Image style={styles.profilePicture} source={require('../images/user.jpg')}/>
                                     <Text style={styles.username}>{photo.name}</Text>
                                 </View>
                                 <View style={styles.firstMiniContainer2}>

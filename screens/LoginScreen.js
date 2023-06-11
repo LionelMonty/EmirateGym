@@ -6,6 +6,7 @@ import { currentUserID2 } from './Receipt';
 import { currentUserIDUpdate } from '../database/Update';
 import { currentUserIDNotification } from '../database/Read';
 import { currentUserIDPhoto } from './PhotoPage';
+import { currentUserIDProfile } from './Profile';
 
 const LoginScreen = props => {
 
@@ -33,6 +34,7 @@ const LoginScreen = props => {
         currentUserIDUpdate(actual_user_id);
         currentUserIDNotification(actual_user_id);
         currentUserIDPhoto(actual_user_id);
+        currentUserIDProfile(actual_user_id);
       })
       .catch(error => {
         if (error.code === 'auth/user-not-found'){

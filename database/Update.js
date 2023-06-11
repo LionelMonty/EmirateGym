@@ -83,8 +83,22 @@ export const updateBooking = async (selectedTime, nameOfDay, tempTitle) => {
     await updateDoc(bookingRef, {
       bookingDetail: bookingDetail,
     });
-    } catch (e) {
-      console.error("Error updating document: ", e);
+  }   
+  catch (e) {
+    console.error("Error updating document: ", e);
   }
 }
+
+export const updatePhotoToFirestore = async (userID,downloadURL) => {
+  try {
+    const userRef = doc(db, "User", userID);
+
+    await updateDoc(userRef, {
+      photoName: downloadURL,
+    });
+  } 
+  catch (e) {
+    console.error("Error updating document: ", e);
+  }
+};
 

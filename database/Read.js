@@ -260,3 +260,20 @@ export const readUserProfileGallery = async () => {
     alert("Error getting document: ", e);
   }
 };
+
+export const readUserProfilePhoto= async () => {
+  try {
+    const q = collection(db, "User");
+    const querySnapshot = await getDocs(q);
+    let photoName;
+    querySnapshot.forEach((doc) => {
+      if (doc.id === currentUser) {
+        photoName = doc.data().photoName;
+      }
+    })
+    return photoName;
+  } 
+  catch (e) {
+    alert("Error getting document: ", e);
+  }
+};

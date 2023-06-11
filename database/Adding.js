@@ -16,6 +16,7 @@ export const AddUser = async (user_id, user_name) => {
   try {
       await setDoc(doc(db, "User", user_id), {
           username: user_name,
+          photoName: "",
       });
       
     } catch (e) {

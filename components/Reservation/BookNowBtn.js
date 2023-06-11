@@ -1,5 +1,5 @@
 import { Text, StyleSheet, TouchableOpacity, View, Dimensions } from 'react-native'
-import React from 'react';
+import React, { useState } from 'react';
 import { checkUserMembership } from '../../database/Adding';
 import {  useNavigation } from '@react-navigation/native';
 import { checkBookingExist } from '../../database/Read';
@@ -14,16 +14,36 @@ export const bookingInfo = (selectedTime, nameOfDay, tempTitle) => {
 const { width } = Dimensions.get('window');
 const responsiveWidth = width * 0.42; // 90% of the screen width
 
-const BookNowBtn = () => {
+const BookNowBtn = (props) => {
   const navigation = useNavigation();
 
   const paymentPage = () => {
     navigation.navigate("Single Pay");
   };
 
+  const check = () => {
+    if(props.title === "Swimming Pool") {
+        if(props.count === 8) {
+          return true;
+        }
+    }
+    else{
+      if(props.count === 28) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  const handleBookNow = () => {
+    if (!check()) {
+      checkUserMembership(info, paymentPage());
+    }
+  };
+
   return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.buttonBook} onPress={() => {checkUserMembership(info, paymentPage)}}>
+        <TouchableOpacity style={[styles.buttonBook, check() && styles.disabledButton]} onPress={handleBookNow}>
             <Text style={styles.buttonText}>Book Now</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonCancel} onPress={() => {checkBookingExist(info)}}>
@@ -60,5 +80,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     textAlign: 'center',
+  },
+  disabledButton: {
+    opacity: 0.5,
+    cursor: 'not-allowed',
   },
 });

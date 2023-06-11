@@ -8,6 +8,7 @@ import { getReservedBooking } from '../database/Read';
 import { checkTodayBooking } from '../database/Read';
 
 let information = {};
+let updatedCount;
 
 export const abdValueInfo = (nameOfDay, tempTitle, selectedTime) => {
     return information = { nameOfDay: nameOfDay, tempTitle: tempTitle, selectedTime:selectedTime }
@@ -19,8 +20,16 @@ const AbdsReservation = () => {
     const title = information.tempTitle;
 
     useEffect(() => {
-        getReservedBooking(information.nameOfDay, information.tempTitle, information.selectedTime, setCount);
-        checkTodayBooking(information.nameOfDay, information.tempTitle, information.selectedTime);
+        const fetchData = async () => {
+            try {
+                updatedCount = await getReservedBooking(information.nameOfDay, information.tempTitle, information.selectedTime, setCount);
+              checkTodayBooking(information.nameOfDay, information.tempTitle, information.selectedTime);
+            } catch (error) {
+              console.error("Error fetching booking data: ", error);
+            }
+          };
+      
+          fetchData();
     }, []);
 
     return (
@@ -29,7 +38,7 @@ const AbdsReservation = () => {
           <ViewSchedule picture={require('../images/abd.jpg')} count = {count}/>
           <LabelSchedule/>
           <MainStats count = {count} title = {title}/>
-          <BookNowBtn/>
+          <BookNowBtn count = {count} title = {title}/>
       </View>
     )
 }

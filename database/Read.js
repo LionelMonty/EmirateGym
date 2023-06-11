@@ -266,12 +266,14 @@ export const readUserProfilePhoto= async () => {
     const q = collection(db, "User");
     const querySnapshot = await getDocs(q);
     let photoName;
+    let username;
     querySnapshot.forEach((doc) => {
       if (doc.id === currentUser) {
         photoName = doc.data().photoName;
+        username = doc.data().username;
       }
     })
-    return photoName;
+    return {photoName, username};
   } 
   catch (e) {
     alert("Error getting document: ", e);

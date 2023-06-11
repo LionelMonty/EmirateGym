@@ -23,16 +23,11 @@ const BookNowBtn = (props) => {
 
   const check = () => {
     if(props.title === "Swimming Pool") {
-        if(props.count === 8) {
-          return true;
-        }
+      return props.count === 8;
     }
     else{
-      if(props.count === 28) {
-        return true;
-      }
+      return props.count === 28;
     }
-    return false;
   }
 
   const handleBookNow = () => {
@@ -43,7 +38,7 @@ const BookNowBtn = (props) => {
 
   return (
       <View style={styles.container}>
-        <TouchableOpacity style={[styles.buttonBook, check() && styles.disabledButton]} onPress={handleBookNow}>
+        <TouchableOpacity style={styles.buttonBook} onPress={() => {checkUserMembership(info, paymentPage)}}>
             <Text style={styles.buttonText}>Book Now</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonCancel} onPress={() => {checkBookingExist(info)}}>
@@ -80,9 +75,5 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     textAlign: 'center',
-  },
-  disabledButton: {
-    opacity: 0.5,
-    cursor: 'not-allowed',
   },
 });

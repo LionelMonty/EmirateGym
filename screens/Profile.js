@@ -23,6 +23,7 @@ const Profile = () => {
     const [arrayDetail, setArrayDetail] = useState([]);
     const [refresh, setRefresh] = useState(true);
     const [photoName, setPhotoName] = useState('');
+    const [name, setname] = useState('');
 
     useEffect(() => {
         const getPhoto = async () => {
@@ -53,7 +54,8 @@ const Profile = () => {
         const fetchUserProfilePhoto = async () => {
           try {
             const name = await readUserProfilePhoto();
-            setPhotoName(name);
+            setPhotoName(name.photoName);
+            setname(name.username)
             setRefresh(false);
           } catch (error) {
             console.error('Error fetching user profile photo:', error);
@@ -66,7 +68,7 @@ const Profile = () => {
     const renderProfilePic = () => {
         if (photoName === '') {
           return (
-            <Image source={require('../images/visa.png')} style={styles.profilePic} />
+            <Image source={require('../images/user.jpg')} style={styles.profilePic} />
           );
         } 
         else {
@@ -184,7 +186,7 @@ const Profile = () => {
                     <TouchableOpacity style={styles.button} onPress={pickImage}>
                         {renderProfilePic()}
                     </TouchableOpacity>
-                    <Text style={styles.text}>Lionel Monty</Text>
+                    <Text style={styles.text}>{name}</Text>
                 </View>
                 <Card.Divider style={styles.sperator}/>
                 <ScrollView>
